@@ -9,7 +9,7 @@ export const appStyling = StyleSheet.create({
 			"radial-gradient(at center bottom, rgb(45, 55, 71), rgb(7, 14, 29), rgb(0, 0, 0))",
 	},
 	text: {
-		fontSize: "24px",
+		fontSize: 24,
 		color: "white",
 		fontWeight: "bold",
 	},

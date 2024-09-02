@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import { Image, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import Goal from './classes/Goal';
 import GoalInput from './components/GoalInput';
 import GoalList from './components/GoalList';
@@ -41,13 +41,20 @@ export default function App() {
       enabled
       behavior='padding'
     >
-      <GoalList goals={goals} deleteGoal={deleteGoal} />
-      <GoalInput
-        addGoal={addGoal}
-        onTextInputChange={onTextInputChange}
-        text={text}
-        populateList={populateList}
+      <Image
+        className='absolute top-0'
+        source={require('./assets/background-image.jpg')}
+        resizeMode='repeat'
       />
+      <SafeAreaView className='flex-1 items-center justify-between w-full'>
+        <GoalList goals={goals} deleteGoal={deleteGoal} />
+        <GoalInput
+          addGoal={addGoal}
+          onTextInputChange={onTextInputChange}
+          text={text}
+          populateList={populateList}
+        />
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }

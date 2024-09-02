@@ -10,7 +10,7 @@ export default function GoalList({
 }) {
   return (
     <FlatList
-      className='mt-12 w-full'
+      className='w-full'
       data={goals}
       keyExtractor={(item) => item.getID()}
       renderItem={({ item }) => (

@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Image, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import Goal from './classes/Goal';
@@ -36,25 +37,28 @@ export default function App() {
   }
 
   return (
-    <KeyboardAvoidingView
-      className='flex-1 items-center justify-between px-4 pb-12'
-      enabled
-      behavior='padding'
-    >
-      <Image
-        className='absolute top-0'
-        source={require('./assets/background-image.jpg')}
-        resizeMode='repeat'
-      />
-      <SafeAreaView className='flex-1 items-center justify-between w-full'>
-        <GoalList goals={goals} deleteGoal={deleteGoal} />
-        <GoalInput
-          addGoal={addGoal}
-          onTextInputChange={onTextInputChange}
-          text={text}
-          populateList={populateList}
+    <>
+      <StatusBar style='light' />
+      <KeyboardAvoidingView
+        className='flex-1 items-center justify-between px-4 pb-12'
+        enabled
+        behavior='padding'
+      >
+        <Image
+          className='absolute top-0'
+          source={require('./assets/background-image.jpg')}
+          resizeMode='repeat'
         />
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+        <SafeAreaView className='w-full flex-1 items-center justify-between'>
+          <GoalList goals={goals} deleteGoal={deleteGoal} />
+          <GoalInput
+            addGoal={addGoal}
+            onTextInputChange={onTextInputChange}
+            text={text}
+            populateList={populateList}
+          />
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    </>
   );
 }

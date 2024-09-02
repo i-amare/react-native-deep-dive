@@ -16,7 +16,7 @@ export default function GoalList({
       renderItem={({ item }) => (
         <TouchableHighlight
           underlayColor='crimson'
-          className='my-1 w-full rounded-md bg-slate-800 p-3'
+          className='my-1 w-full rounded-md bg-slate-800 px-3 py-4'
           onPress={() => deleteGoal(item.getID())}
         >
           <Text className='font-semibold text-white'>{item.getText()}</Text>

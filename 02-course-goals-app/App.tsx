@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
   FlatList,
+  KeyboardAvoidingView,
   Text,
   TextInput,
   TouchableHighlight,
@@ -13,6 +14,14 @@ export default function App() {
   const [goals, setGoals] = useState<Goal[]>([]);
   const [text, setText] = useState('');
 
+  function deleteGoal(itemID: String) {
+    setGoals((prevGoalState) => {
+      return prevGoalState.filter((goal) => {
+        return goal.getID() !== itemID;
+      });
+    });
+  }
+
   function onTextInputChange(text: string) {
     setText(text);
   }
@@ -23,21 +32,26 @@ export default function App() {
   }
 
   return (
-    <View className='flex-1 items-center justify-between bg-white pb-10 pt-14'>
+    <KeyboardAvoidingView
+      className='flex-1 items-center justify-between pb-12'
+      enabled
+      behavior='padding'
+    >
       <FlatList
+        className='mt-12'
         data={goals}
         keyExtractor={(item) => item.getID()}
         renderItem={({ item }) => (
           <TouchableHighlight
             underlayColor='crimson'
             className='my-1 w-[90vw] rounded-md bg-slate-600 p-3'
-            onPress={() => 0}
+            onPress={() => deleteGoal(item.getID())}
           >
             <Text className='font-semibold text-white'>{item.getText()}</Text>
           </TouchableHighlight>
         )}
       />
-      <View className='flex w-[90vw] flex-row content-center items-center gap-2 rounded-md bg-gray-800 px-2 py-1'>
+      <View className='mb-4 flex w-[90vw] flex-row content-center items-center gap-2 rounded-md bg-gray-800 px-2 py-1'>
         <TouchableOpacity
           onPress={addGoal}
           className='-translate-y-[5.5px] px-2 py-1'
@@ -55,6 +69,6 @@ export default function App() {
           value={text}
         />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

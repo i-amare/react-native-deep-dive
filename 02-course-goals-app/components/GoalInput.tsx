@@ -1,16 +1,18 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+type GoalInputProps=  {
+  addGoal: () => void;
+  onTextInputChange: (text: string) => void;
+  populateList: () => void;
+  text: string;
+}
+
 export default function GoalInput({
   addGoal,
   onTextInputChange,
   text,
   populateList,
-}: {
-  addGoal: () => void;
-  onTextInputChange: (text: string) => void;
-  text: string;
-  populateList: () => void;
-}) {
+}: GoalInputProps) {
   return (
     <View className='mb-2 flex w-full flex-row content-center items-center gap-2 rounded-md bg-gray-800 py-1'>
       <TouchableOpacity

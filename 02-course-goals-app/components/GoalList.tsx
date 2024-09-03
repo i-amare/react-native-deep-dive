@@ -1,13 +1,12 @@
 import { FlatList, Text, TouchableHighlight } from 'react-native';
 import Goal from '../classes/Goal';
 
-export default function GoalList({
-  goals,
-  deleteGoal,
-}: {
+type GoalListProps = {
   goals: Goal[];
-  deleteGoal: (itemID: String) => void;
-}) {
+  deleteGoal: (itemID: string) => void;
+};
+
+export default function GoalList({ goals, deleteGoal }: GoalListProps) {
   return (
     <FlatList
       className='w-full'

@@ -48,7 +48,10 @@ export default function HomePage() {
       ]);
     } else {
       Keyboard.dismiss();
-      router.navigate('/game-screen');
+      router.navigate({
+        pathname: '/game-screen/[number]',
+        params: { number: Number(enteredNumber) },
+      });
     }
   }
 

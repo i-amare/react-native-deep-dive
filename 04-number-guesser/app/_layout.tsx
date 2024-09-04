@@ -1,5 +1,6 @@
 import { Image, SafeAreaView } from 'react-native';
 import HomePage from './index';
+import { Slot } from 'expo-router';
 
 export default function RootLayout() {
   return (
@@ -9,7 +10,7 @@ export default function RootLayout() {
         resizeMode='cover'
         source={require('../assets/images/pixel_art_background.jpg')}
       />
-      <HomePage />
+      <Slot />
     </SafeAreaView>
   );
 }

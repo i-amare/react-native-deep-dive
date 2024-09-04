@@ -1,4 +1,5 @@
 import { BlurView } from 'expo-blur';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
   Alert,
@@ -12,6 +13,7 @@ import NumberInput from './components/numberInput';
 
 export default function HomePage() {
   const [enteredNumber, setEnteredNumber] = useState('00');
+  const router = useRouter();
 
   function onKeyPress(e: NativeSyntheticEvent<TextInputKeyPressEventData>) {
     const key = e.nativeEvent.key;
@@ -44,8 +46,10 @@ export default function HomePage() {
           onPress: () => setEnteredNumber('00'),
         },
       ]);
+    } else {
+      Keyboard.dismiss();
+      router.navigate('/game-screen');
     }
-    Keyboard.dismiss();
   }
 
   return (

@@ -12,7 +12,7 @@ import Button from './components/button';
 import NumberInput from './components/numberInput';
 
 export default function HomePage() {
-  const [enteredNumber, setEnteredNumber] = useState('00');
+  const [targetNumber, setEnteredNumber] = useState('00');
   const router = useRouter();
 
   function onKeyPress(e: NativeSyntheticEvent<TextInputKeyPressEventData>) {
@@ -20,9 +20,9 @@ export default function HomePage() {
     let num: number;
 
     const acceptedCharacters = '0123456789';
-    if (key == 'Backspace') num = Number(enteredNumber[0]);
+    if (key == 'Backspace') num = Number(targetNumber[0]);
     if (acceptedCharacters.indexOf(key) !== -1)
-      num = Number(enteredNumber + key);
+      num = Number(targetNumber + key);
 
     setEnteredNumber(() => {
       if (num > 99) return num.toString().slice(0, 2);
@@ -37,7 +37,7 @@ export default function HomePage() {
   }
 
   function onStartButtonPress() {
-    const num = Number(enteredNumber);
+    const num = Number(targetNumber);
     if (num <= 0 || num >= 100) {
       Alert.alert('Invalid Number', 'Number must be between 0 and 100.', [
         {
@@ -49,8 +49,8 @@ export default function HomePage() {
     } else {
       Keyboard.dismiss();
       router.navigate({
-        pathname: '/game-screen/[number]',
-        params: { number: Number(enteredNumber) },
+        pathname: '/game-screen/[targetNumber]',
+        params: { targetNumber: Number(targetNumber) },
       });
     }
   }
@@ -63,7 +63,7 @@ export default function HomePage() {
           tint='light'
           className='flex items-center justify-center rounded-md px-4 pb-8'
         >
-          <NumberInput text={enteredNumber} onKeyPress={onKeyPress} />
+          <NumberInput text={targetNumber} onKeyPress={onKeyPress} />
           <View className='flex flex-row justify-center space-x-4'>
             <Button text='Start' onPress={onStartButtonPress} />
             <View className='w-4' />

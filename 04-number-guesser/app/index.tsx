@@ -1,6 +1,8 @@
 import { BlurView } from 'expo-blur';
 import { useState } from 'react';
 import {
+  Alert,
+  Keyboard,
   NativeSyntheticEvent,
   TextInputKeyPressEventData,
   View,
@@ -17,13 +19,33 @@ export default function HomePage() {
 
     const acceptedCharacters = '0123456789';
     if (key == 'Backspace') num = Number(enteredNumber[0]);
-    if (acceptedCharacters.indexOf(key) !== -1) num = Number(enteredNumber + key);
+    if (acceptedCharacters.indexOf(key) !== -1)
+      num = Number(enteredNumber + key);
 
     setEnteredNumber(() => {
       if (num > 99) return num.toString().slice(0, 2);
       if (num < 10) return '0' + num.toString();
       else return num.toString();
     });
+  }
+
+  function onResetButtonPress() {
+    Keyboard.dismiss();
+    setEnteredNumber('00');
+  }
+
+  function onStartButtonPress() {
+    const num = Number(enteredNumber);
+    if (num <= 0 || num >= 100) {
+      Alert.alert('Invalid Number', 'Number must be between 0 and 100.', [
+        {
+          text: 'Ok',
+          style: 'destructive',
+          onPress: () => setEnteredNumber('00'),
+        },
+      ]);
+    }
+    Keyboard.dismiss();
   }
 
   return (
@@ -36,9 +58,9 @@ export default function HomePage() {
         >
           <NumberInput text={enteredNumber} onKeyPress={onKeyPress} />
           <View className='flex flex-row justify-center space-x-4'>
-            <Button text='Start' />
+            <Button text='Start' onPress={onStartButtonPress} />
             <View className='w-4' />
-            <Button text='Confirm' />
+            <Button text='Reset' onPress={onResetButtonPress} />
           </View>
         </BlurView>
       </View>

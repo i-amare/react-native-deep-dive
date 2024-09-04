@@ -1,17 +1,19 @@
-import { Keyboard, Text, TouchableHighlight } from 'react-native';
+import { Keyboard, Text, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 type buttonProps = {
   text: string;
+  onPress?: () => void
 };
 
-export default function Button({ text }: buttonProps) {
+export default function Button({ text, onPress }: buttonProps) {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       className='rounded-md bg-slate-800 px-12 py-4'
-      underlayColor='cornflowerblue'
-      onPress={() => Keyboard.dismiss()}
+      activeOpacity={0.6}
+      // underlayColor='cornflowerblue'
+      onPress={onPress}
     >
       <Text className='text-lg font-bold text-white'>{text}</Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }

@@ -1,9 +1,9 @@
-import Index from "./index";
+import HomePage from './index';
 
 export default function RootLayout() {
-	return (
-		<>
-			<Index />
-		</>
-	);
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }

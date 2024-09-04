@@ -6,25 +6,23 @@ import {
   View,
 } from 'react-native';
 import Button from './components/button';
-import NumberInput from './components/textInput';
+import NumberInput from './components/numberInput';
 
 export default function HomePage() {
-  const [enteredNumber, setEnteredNumber] = useState('0');
+  const [enteredNumber, setEnteredNumber] = useState('00');
 
   function onKeyPress(e: NativeSyntheticEvent<TextInputKeyPressEventData>) {
     const key = e.nativeEvent.key;
-
-    if (key == 'Backspace') {
-      setEnteredNumber((prev) => prev[prev.length - 2] || '0');
-      return;
-    }
+    let num: number;
 
     const acceptedCharacters = '0123456789';
-    if (acceptedCharacters.indexOf(key) == -1) return;
-    if (enteredNumber.length >= 2) return;
+    if (key == 'Backspace') num = Number(enteredNumber[0]);
+    if (acceptedCharacters.indexOf(key) !== -1) num = Number(enteredNumber + key);
 
-    setEnteredNumber((prev) => {
-      return Number(prev + key).toString();
+    setEnteredNumber(() => {
+      if (num > 99) return num.toString().slice(0, 2);
+      if (num < 10) return '0' + num.toString();
+      else return num.toString();
     });
   }
 

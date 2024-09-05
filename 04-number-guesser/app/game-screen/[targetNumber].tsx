@@ -3,6 +3,8 @@ import { Link, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import Button from '../components/button';
+import ExitButton from './components/exitButton';
+import GuessContainer from './components/guessContainer';
 
 export default function GameScreen() {
   const { targetNumber } = useLocalSearchParams();
@@ -39,34 +41,12 @@ export default function GameScreen() {
 
   return (
     <View className='flex-1 justify-between'>
-      <View className='mx-auto mt-12 overflow-hidden rounded-xl'>
-        <BlurView
-          intensity={65}
-          tint='extraLight'
-          className='flex items-center justify-center rounded-xl px-4 py-6'
-        >
-          <View className='flex w-full'>
-            <Text className='mb-4 w-full text-center text-4xl font-semibold'>
-              Opponents Guess
-            </Text>
-            <Text className='w-full text-center text-6xl font-semibold'>
-              {`${guessedNumber.toString().padStart(2, '0')}`}
-            </Text>
-          </View>
-          <View className='flex w-full flex-row justify-center'>
-            <Button text='Lower' onPress={onLowerButtonPress} />
-            <View className='w-4' />
-            <Button text='Higher' onPress={onHigherButtonPress} />
-          </View>
-        </BlurView>
-      </View>
-      <TouchableHighlight className='mx-auto w-11/12 rounded-xl bg-rose-500 py-4'>
-        <Link href='/' className='w-full'>
-          <Text className='w-full text-center text-xl font-semibold uppercase'>
-            Exit Game
-          </Text>
-        </Link>
-      </TouchableHighlight>
+      <GuessContainer
+        guessedNumber={guessedNumber}
+        onLowerButtonPress={onLowerButtonPress}
+        onHigherButtonPress={onHigherButtonPress}
+      />
+      <ExitButton />
     </View>
   );
 }

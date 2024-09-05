@@ -17,18 +17,16 @@ export default function HomePage() {
 
   function onKeyPress(e: NativeSyntheticEvent<TextInputKeyPressEventData>) {
     const key = e.nativeEvent.key;
-    let num: number;
+    let num: number = 0;
 
     const acceptedCharacters = '0123456789';
-    if (key == 'Backspace') num = Number(targetNumber[0]);
-    if (acceptedCharacters.indexOf(key) !== -1)
+    if (key == 'Backspace') {
+      num = Number(targetNumber[0]);
+      setEnteredNumber(num.toString().slice(0, 2).padStart(2, '0'));
+    } else if (acceptedCharacters.indexOf(key) !== -1) {
       num = Number(targetNumber + key);
-
-    setEnteredNumber(() => {
-      if (num > 99) return num.toString().slice(0, 2);
-      if (num < 10) return '0' + num.toString();
-      else return num.toString();
-    });
+      setEnteredNumber(num.toString().slice(0, 2).padStart(2, '0'));
+    }
   }
 
   function onResetButtonPress() {
@@ -57,7 +55,7 @@ export default function HomePage() {
 
   return (
     <View className='flex-1 items-center justify-center'>
-      <View className='overflow-hidden rounded-xl '>
+      <View className='overflow-hidden rounded-xl'>
         <BlurView
           intensity={65}
           tint='extraLight'

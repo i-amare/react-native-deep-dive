@@ -7,7 +7,13 @@ module.exports = {
     './**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        '8bit': '8bit-dragon',
+        space: 'space-mono',
+        vermin: 'vermin-vibes',
+      },
+    },
   },
   plugins: [],
 };

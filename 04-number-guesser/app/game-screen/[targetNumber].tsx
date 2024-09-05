@@ -1,7 +1,7 @@
 import { BlurView } from 'expo-blur';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableHighlight, View } from 'react-native';
 import Button from '../components/button';
 
 export default function GameScreen() {
@@ -38,12 +38,12 @@ export default function GameScreen() {
   }
 
   return (
-    <View className='flex-1'>
-      <View className='mx-auto mt-12 overflow-hidden rounded-lg'>
+    <View className='flex-1 justify-between'>
+      <View className='mx-auto mt-12 overflow-hidden rounded-xl'>
         <BlurView
           intensity={65}
           tint='extraLight'
-          className='flex items-center justify-center rounded-md px-4 py-6'
+          className='flex items-center justify-center rounded-xl px-4 py-6'
         >
           <View className='flex w-full'>
             <Text className='mb-4 w-full text-center text-4xl font-semibold'>
@@ -60,7 +60,13 @@ export default function GameScreen() {
           </View>
         </BlurView>
       </View>
-      <Link href='/'>Please Work! - {targetNumber} </Link>
+      <TouchableHighlight className='mx-auto w-11/12 rounded-xl bg-rose-500 py-4'>
+        <Link href='/' className='w-full'>
+          <Text className='w-full text-center text-xl font-semibold uppercase'>
+            Exit Game
+          </Text>
+        </Link>
+      </TouchableHighlight>
     </View>
   );
 }

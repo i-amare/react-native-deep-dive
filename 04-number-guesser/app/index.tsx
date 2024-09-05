@@ -57,10 +57,10 @@ export default function HomePage() {
 
   return (
     <View className='flex-1 items-center justify-center'>
-      <View className='overflow-hidden rounded-xl bg-white/30'>
+      <View className='overflow-hidden rounded-xl '>
         <BlurView
-          intensity={50}
-          tint='light'
+          intensity={65}
+          tint='extraLight'
           className='flex items-center justify-center rounded-md px-4 pb-8'
         >
           <NumberInput text={targetNumber} onKeyPress={onKeyPress} />

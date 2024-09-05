@@ -55,16 +55,15 @@ export default function HomePage() {
 
   return (
     <View className='flex-1 items-center justify-center'>
-      <View className='overflow-hidden rounded-xl'>
+      <View className='overflow-hidden rounded-xl w-11/12'>
         <BlurView
           intensity={65}
           tint='extraLight'
-          className='flex items-center justify-center rounded-md px-4 pb-8'
+          className='flex items-center justify-center rounded-md px-4 pb-8 w-full'
         >
           <NumberInput text={targetNumber} onKeyPress={onKeyPress} />
-          <View className='flex flex-row justify-center space-x-4'>
+          <View className='flex flex-row justify-between w-full'>
             <Button text='Start' onPress={onStartButtonPress} />
-            <View className='w-4' />
             <Button text='Reset' onPress={onResetButtonPress} />
           </View>
         </BlurView>

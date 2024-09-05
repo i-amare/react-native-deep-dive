@@ -21,10 +21,10 @@ export default function GuessContainer({
         className='flex items-center justify-center rounded-xl px-4 py-6'
       >
         <View className='flex w-full'>
-          <Text className='mb-4 w-full text-center text-4xl font-semibold'>
+          <Text className='mb-2 w-full text-center text-4xl font-vermin'>
             Opponents Guess
           </Text>
-          <Text className='w-full text-center text-6xl font-semibold'>
+          <Text className='w-full text-center text-8xl font-vermin'>
             {`${guessedNumber.toString().padStart(2, '0')}`}
           </Text>
         </View>

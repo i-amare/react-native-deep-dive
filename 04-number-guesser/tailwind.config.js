@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        '8bit': '8bit-dragon',
+        dragon: 'dragon',
         space: 'space-mono',
         vermin: 'vermin-vibes',
       },

@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 
 export default function RootLayout() {
   useFonts({
-    '8bit-dragon': require('../assets/fonts/EightBitDragon-anqx.ttf'),
+    'dragon': require('../assets/fonts/EightBitDragon-anqx.ttf'),
     'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
     'vermin-vibes': require('../assets/fonts/VerminVibes1989Regular-m77m.ttf'),
   });

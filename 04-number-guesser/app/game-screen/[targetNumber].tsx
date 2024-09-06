@@ -40,7 +40,7 @@ export default function GameScreen() {
   }
 
   return (
-    <View className='flex-1 justify-between'>
+    <View className='flex-1 justify-between items-center'>
       <GuessContainer
         guessedNumber={guessedNumber}
         onLowerButtonPress={onLowerButtonPress}

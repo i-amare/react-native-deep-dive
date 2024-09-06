@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Button from './components/button';
 import NumberInput from './components/numberInput';
+import BlurContainer from './components/BlurContainer';
 
 export default function HomePage() {
   const [targetNumber, setEnteredNumber] = useState('00');
@@ -55,19 +56,13 @@ export default function HomePage() {
 
   return (
     <View className='flex-1 items-center justify-center'>
-      <View className='overflow-hidden rounded-xl w-11/12'>
-        <BlurView
-          intensity={65}
-          tint='extraLight'
-          className='flex items-center justify-center rounded-md px-4 pb-8 w-full'
-        >
-          <NumberInput text={targetNumber} onKeyPress={onKeyPress} />
-          <View className='flex flex-row justify-between w-full'>
-            <Button text='Start' onPress={onStartButtonPress} />
-            <Button text='Reset' onPress={onResetButtonPress} />
-          </View>
-        </BlurView>
-      </View>
+      <BlurContainer>
+        <NumberInput text={targetNumber} onKeyPress={onKeyPress} />
+        <View className='mb-8 flex w-full flex-row justify-between'>
+          <Button text='Start' onPress={onStartButtonPress} />
+          <Button text='Reset' onPress={onResetButtonPress} />
+        </View>
+      </BlurContainer>
     </View>
   );
 }

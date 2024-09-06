@@ -29,6 +29,7 @@ export default function GameScreen() {
         pathname: '/game-over',
         params: {
           numGuesses: guesses.length,
+          targetNumber: targetNumber
         },
       });
     }

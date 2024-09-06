@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 
 export default function GameOverScreen() {
   const router = useRouter();
-  const { numGuesses } = useLocalSearchParams();
+  const { numGuesses, targetNumber } = useLocalSearchParams();
 
   return (
     <View className='flex-1 items-center justify-center'>
@@ -14,7 +14,9 @@ export default function GameOverScreen() {
           Game Over
         </Text>
         <Text className='mb-2 font-vermin text-3xl'>
-          Guessed in {numGuesses} Guesses !
+          Guessed <Text className='text-red-500 underline'>{targetNumber}</Text> in{' '}
+          <Text className='text-red-500 underline'> {numGuesses}</Text> Guesses
+          !
         </Text>
         <TouchableOpacity
           onPress={() => router.navigate('/')}

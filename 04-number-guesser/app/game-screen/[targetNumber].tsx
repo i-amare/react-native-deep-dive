@@ -1,5 +1,5 @@
 import { BlurView } from 'expo-blur';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, TouchableHighlight, View } from 'react-native';
 import Button from '../components/button';
@@ -12,6 +12,7 @@ export default function GameScreen() {
   const [minGuess, setMinGuess] = useState(0);
   const [maxGuess, setMaxGuess] = useState(99);
   const [guesses, setGuesses] = useState<Number[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     console.log({
@@ -22,6 +23,10 @@ export default function GameScreen() {
     });
     setGuessedNumber(generateRandomBetween(minGuess, maxGuess));
   }, [guesses]);
+
+  useEffect(() => {
+    if (guessedNumber == Number(targetNumber)) router.navigate('/game-over');
+  }, [guessedNumber]);
 
   function generateRandomBetween(min: number, max: number) {
     const randNum = Math.floor(Math.random() * (max - min)) + min;
@@ -40,7 +45,7 @@ export default function GameScreen() {
   }
 
   return (
-    <View className='flex-1 justify-between items-center'>
+    <View className='flex-1 items-center justify-between'>
       <GuessContainer
         guessedNumber={guessedNumber}
         onLowerButtonPress={onLowerButtonPress}

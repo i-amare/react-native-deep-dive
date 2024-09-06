@@ -1,8 +1,6 @@
-import { BlurView } from 'expo-blur';
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
-import Button from '../components/button';
+import { View } from 'react-native';
 import ExitButton from './components/exitButton';
 import GuessContainer from './components/guessContainer';
 
@@ -25,7 +23,14 @@ export default function GameScreen() {
   }, [guesses]);
 
   useEffect(() => {
-    if (guessedNumber == Number(targetNumber)) router.navigate('/game-over');
+    if (guessedNumber == Number(targetNumber)) {
+      router.navigate({
+        pathname: 'game-over',
+        params: {
+          numGuesses: guesses.length,
+        },
+      });
+    }
   }, [guessedNumber]);
 
   function generateRandomBetween(min: number, max: number) {

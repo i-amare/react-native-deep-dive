@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import ExitButton from './components/exitButton';
 import GuessContainer from './components/guessContainer';
 import GuessList from './components/guessList';
@@ -41,13 +41,27 @@ export default function GameScreen() {
   }
 
   function onLowerButtonPress() {
-    setMaxGuess(guessedNumber);
-    setGuesses((prev) => [...prev, guessedNumber]);
+    if (guessedNumber > Number(targetNumber)) {
+      setMaxGuess(guessedNumber);
+      setGuesses((prev) => [...prev, guessedNumber]);
+    } else {
+      Alert.alert(
+        'Invalid Input',
+        "You're number is actually larger than the guess",
+      );
+    }
   }
 
   function onHigherButtonPress() {
-    setMinGuess(guessedNumber);
-    setGuesses((prev) => [...prev, guessedNumber]);
+    if (guessedNumber < Number(targetNumber)) {
+      setMinGuess(guessedNumber);
+      setGuesses((prev) => [...prev, guessedNumber]);
+    } else {
+      Alert.alert(
+        'Invalid Input',
+        "You're number is actually smaller than the guess",
+      );
+    }
   }
 
   return (
@@ -57,7 +71,7 @@ export default function GameScreen() {
         onLowerButtonPress={onLowerButtonPress}
         onHigherButtonPress={onHigherButtonPress}
       />
-      <GuessList guesses={guesses} targetNumber={targetNumber} />
+      <GuessList guesses={guesses} targetNumber={Number(targetNumber)} />
       <ExitButton />
     </View>
   );

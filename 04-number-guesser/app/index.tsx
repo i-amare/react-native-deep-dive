@@ -48,7 +48,7 @@ export default function HomePage() {
     } else {
       Keyboard.dismiss();
       router.navigate({
-        pathname: '/game-screen/[targetNumber]',
+        pathname: '/game-screen',
         params: { targetNumber: Number(targetNumber) },
       });
     }

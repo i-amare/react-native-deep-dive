@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import ExitButton from './components/exitButton';
 import GuessContainer from './components/guessContainer';
+import GuessList from './components/guessList';
 
 export default function GameScreen() {
   const { targetNumber } = useLocalSearchParams();
   const [guessedNumber, setGuessedNumber] = useState(-1);
   const [minGuess, setMinGuess] = useState(0);
   const [maxGuess, setMaxGuess] = useState(99);
-  const [guesses, setGuesses] = useState<Number[]>([]);
+  const [guesses, setGuesses] = useState<number[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export default function GameScreen() {
   useEffect(() => {
     if (guessedNumber == Number(targetNumber)) {
       router.navigate({
-        pathname: 'game-over',
+        pathname: '/game-over',
         params: {
           numGuesses: guesses.length,
         },
@@ -56,6 +57,7 @@ export default function GameScreen() {
         onLowerButtonPress={onLowerButtonPress}
         onHigherButtonPress={onHigherButtonPress}
       />
+      <GuessList guesses={guesses} targetNumber={targetNumber} />
       <ExitButton />
     </View>
   );

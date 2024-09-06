@@ -1,6 +1,7 @@
 import BlurContainer from '@/app/components/BlurContainer';
 import { FlatList, Text, View } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { BlurView } from 'expo-blur';
 
 type GuessListProps = {
   guesses: number[];
@@ -9,31 +10,41 @@ type GuessListProps = {
 
 export default function GuessList({ guesses, targetNumber }: GuessListProps) {
   return (
-    <BlurContainer>
-      <FlatList
-        className='w-full'
-        data={guesses}
-        renderItem={({ item }) => (
-          <Guess guess={item} targetNumber={targetNumber} />
-        )}
-        keyExtractor={(item, index) => `${index}-${item}`}
-      />
-    </BlurContainer>
+    <View className='w-11/12 overflow-hidden rounded-xl'>
+      <BlurView
+        intensity={65}
+        tint='extraLight'
+        className='flex w-full items-center h-[55vh] justify-center rounded-xl px-4 py-4'
+				>
+				<Text className='font-vermin text-3xl'>Past Guesses</Text>
+        <FlatList
+          className='w-full'
+          data={guesses}
+          keyExtractor={(item, index) => `${index}-${item}`}
+          renderItem={({ item, index }) => (
+            <Guess guess={item} index={index} targetNumber={targetNumber} />
+          )}
+        />
+      </BlurView>
+    </View>
   );
 }
 
 type GuessProps = {
   guess: number;
   targetNumber: number;
+  index: number;
 };
 
-function Guess({ guess, targetNumber }: GuessProps) {
+function Guess({ guess, targetNumber, index }: GuessProps) {
   return (
     <View className='mx-auto my-1 w-full flex-row justify-between rounded-md bg-slate-800 px-6 py-2'>
-      <Text className='font-vermin text-3xl text-white'>Guess:</Text>
+      <Text className='font-vermin text-2xl text-white'>
+        Guess #{index + 1}:
+      </Text>
       <View className='flex flex-row items-center'>
         <Text
-          className={`font-vermin text-3xl ${guess < targetNumber ? 'text-green-400' : 'text-red-400'}`}
+          className={`font-vermin text-2xl ${guess < targetNumber ? 'text-green-400' : 'text-red-400'}`}
         >
           {guess.toString().padStart(2, '0')}{' '}
         </Text>

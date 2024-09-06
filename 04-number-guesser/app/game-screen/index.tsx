@@ -9,7 +9,7 @@ export default function GameScreen() {
   const { targetNumber } = useLocalSearchParams();
   const [guessedNumber, setGuessedNumber] = useState(-1);
   const [minGuess, setMinGuess] = useState(0);
-  const [maxGuess, setMaxGuess] = useState(99);
+  const [maxGuess, setMaxGuess] = useState(100);
   const [guesses, setGuesses] = useState<number[]>([]);
   const router = useRouter();
 
@@ -65,13 +65,15 @@ export default function GameScreen() {
   }
 
   return (
-    <View className='flex-1 items-center justify-between'>
+    <View className='h-full flex-1 items-center justify-between'>
       <GuessContainer
         guessedNumber={guessedNumber}
         onLowerButtonPress={onLowerButtonPress}
         onHigherButtonPress={onHigherButtonPress}
       />
+      <View className='mb-2'></View>
       <GuessList guesses={guesses} targetNumber={Number(targetNumber)} />
+      <View className='mt-2'></View>
       <ExitButton />
     </View>
   );

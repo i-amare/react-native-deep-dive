@@ -1,12 +1,12 @@
 class Category {
   id: string;
   title: string;
-  colour: string;
+  imageUrl: string;
 
-  constructor(id: string, title: string, colour: string) {
+  constructor(id: string, title: string, imageUrl: string) {
     this.id = id;
     this.title = title;
-    this.colour = colour;
+    this.imageUrl = imageUrl;
   }
 }
 

@@ -3,8 +3,10 @@ import { SafeAreaView } from 'react-native';
 
 export default function RootLayout() {
   return (
-    <SafeAreaView className='flex-1'>
-      <Stack />
+    <SafeAreaView className='flex-1 bg-gray-950'>
+      <Stack screenOptions={{
+        headerBackground: () => null
+      }} />
     </SafeAreaView>
   );
 }

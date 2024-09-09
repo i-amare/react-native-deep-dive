@@ -4,7 +4,7 @@ import CategoryCard from './components/categoryCard';
 
 export default function HomePage() {
   return (
-    <View className='flex-1 items-center justify-center'>
+    <View className='flex-1 items-center justify-center bg-gray-950'>
         <FlatList
           data={mealCatagories}
           numColumns={2}

@@ -43,7 +43,7 @@ function Header({ title }: HeaderProps) {
   const onBackButtonPress = () => router.back();
 
   return (
-    <View className='relative flex h-12 flex-row items-center px-4'>
+    <View className='relative flex h-12 flex-row bg-slate-950 items-center px-4'>
       <TouchableOpacity
         onPress={onBackButtonPress}
         className='absolute inset-0 flex aspect-square w-12 items-center justify-center rounded-full bg-gray-900'

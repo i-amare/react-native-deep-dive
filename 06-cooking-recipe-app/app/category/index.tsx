@@ -1,13 +1,24 @@
 import { MEALS } from '@/data/mealData';
-import { useLocalSearchParams } from 'expo-router';
-import { FlatList, Text, View } from 'react-native';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import MealCard from './components/mealCard';
+import { useEffect } from 'react';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function Category() {
-  const { categoryId } = useLocalSearchParams();
+  const { categoryId, categoryTitle } = useLocalSearchParams();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      //@ts-ignore
+      header: () => <Header title={categoryTitle} />,
+    });
+  }, [navigation]);
 
   return (
-    <View className='bg-gray-950 h-full'>
+    <View className='h-full bg-gray-950'>
       <FlatList
         data={MEALS.filter(({ categoryID }) => {
           for (const category of categoryID) {
@@ -18,6 +29,30 @@ export default function Category() {
         renderItem={({ item }) => <MealCard {...item} />}
         className='w-full p-2'
       />
+    </View>
+  );
+}
+
+type HeaderProps = {
+  title: string;
+};
+
+function Header({ title }: HeaderProps) {
+  const router = useRouter();
+
+  const onBackButtonPress = () => router.back();
+
+  return (
+    <View className='relative flex h-12 flex-row items-center px-4'>
+      <TouchableOpacity
+        onPress={onBackButtonPress}
+        className='absolute inset-0 flex aspect-square w-12 items-center justify-center rounded-full bg-gray-900'
+      >
+        <FontAwesome6 name='chevron-left' size={18} color={'white'} />
+      </TouchableOpacity>
+      <Text className='m-auto text-center text-xl font-semibold text-white'>
+        {title}
+      </Text>
     </View>
   );
 }

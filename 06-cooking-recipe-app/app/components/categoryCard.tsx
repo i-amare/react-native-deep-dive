@@ -16,6 +16,7 @@ export default function CategoryCard({
       pathname: '/category',
       params: {
         categoryId: id,
+        categoryTitle: title
       },
     });
   }

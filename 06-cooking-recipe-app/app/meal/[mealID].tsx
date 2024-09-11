@@ -3,8 +3,9 @@ import Meal from '@/models/meal';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import DetailsCard from './components/detailsCard';
+import CookingSteps from './components/cookingSteps';
 
 export default function ItemPage() {
   const { mealID } = useLocalSearchParams();
@@ -23,7 +24,21 @@ export default function ItemPage() {
         className='aspect-[1.15] w-full rounded-b-3xl'
       />
       <DetailsCard {...meal} />
-
+      {/* <Ingredients ingredients={meal.ingredients} /> */}
+      <CookingSteps cookingSteps={meal.steps} />
     </View>
   );
 }
+
+// type IngredientsProps = {
+//   ingredients: string[];
+// };
+
+// function Ingredients({ ingredients }: IngredientsProps) {
+//   return (
+//     <View>
+//       <Text className='text-white'>{ingredients}</Text>
+//     </View>
+//   );
+// }
+

@@ -1,20 +1,25 @@
 import Meal from '@/models/meal';
 import { Entypo, Ionicons } from '@expo/vector-icons';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-type MealCardProps = Meal;
+type MealCardProps = Meal & { onPress: (mealID: string) => void };
 
 export default function MealCard(meal: MealCardProps) {
   return (
-    <View className='my-2 flex w-full flex-row items-center rounded-xl overflow-hidden bg-gray-900'>
+    <TouchableOpacity
+      onPress={() => meal.onPress(meal.id)}
+      className='my-2 flex w-full flex-row items-center overflow-hidden rounded-xl bg-gray-900'
+    >
       <Image
-        className='aspect-square w-28 rounded-xl mr-8'
+        className='mr-8 aspect-square w-28 rounded-xl'
         source={{
           uri: meal.imageUrl,
         }}
       />
       <View className='flex'>
-        <Text className='text-xl font-semibold text-white w-2/3 mb-2'>{meal.title}</Text>
+        <Text className='mb-2 w-2/3 text-xl font-semibold text-white'>
+          {meal.title}
+        </Text>
         <View className='flex flex-row'>
           <Card
             icon={<Entypo name='bar-graph' size={18} color={'black'} />}
@@ -27,7 +32,7 @@ export default function MealCard(meal: MealCardProps) {
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

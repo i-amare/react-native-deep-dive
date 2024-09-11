@@ -1,8 +1,10 @@
 import { MEALS } from '@/data/mealData';
 import Meal from '@/models/meal';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Image, Text, View } from 'react-native';
+import DetailsCard from './components/detailsCard';
 
 export default function ItemPage() {
   const { mealID } = useLocalSearchParams();
@@ -18,8 +20,9 @@ export default function ItemPage() {
         source={{
           uri: meal.imageUrl,
         }}
-				className='w-full aspect-square'
+        className='aspect-square w-full rounded-b-3xl'
       />
+      <DetailsCard {...meal} />
     </View>
   );
 }

@@ -6,13 +6,9 @@ type CookingStepsProps = {
 
 export default function CookingSteps({ cookingSteps }: CookingStepsProps) {
   return (
-    <View className='flex-1'>
-      <FlatList
-        data={cookingSteps}
-        renderItem={({ item, index }) => (
-          <CookingStep index={index} cookingStep={item} />
-        )}
-      />
+    <View className='w-11/12 mx-auto'>
+      <Text className='text-white font-semibold text-lg mb-2'>Cooking Steps</Text>
+			{cookingSteps.map((cookingStep, index) => <CookingStep cookingStep={cookingStep} index={index} />)}
     </View>
   );
 }
@@ -24,8 +20,8 @@ type CookingStepProps = {
 
 function CookingStep({ cookingStep, index }: CookingStepProps) {
   return (
-    <View className='mx-auto mb-4 w-11/12'>
-      <Text className='text-lg font-semibold text-white'>Step {index + 1}</Text>
+    <View className='mb-4'>
+      <Text className='font-semibold text-white'>Step {index + 1}</Text>
       <Text className='text-gray-400'>{cookingStep}</Text>
     </View>
   );

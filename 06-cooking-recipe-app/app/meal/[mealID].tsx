@@ -3,7 +3,7 @@ import Meal from '@/models/meal';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, ScrollView, Text, View } from 'react-native';
 import DetailsCard from './components/detailsCard';
 import CookingSteps from './components/cookingSteps';
 import Ingredients from './components/ingredientsList';
@@ -17,7 +17,7 @@ export default function ItemPage() {
   }, [mealID]);
 
   return meal === undefined ? null : (
-    <View className='flex-1 bg-gray-950'>
+    <ScrollView className='flex-1 bg-gray-950'>
       <Image
         source={{
           uri: meal.imageUrl,
@@ -25,9 +25,10 @@ export default function ItemPage() {
         className='aspect-[1.15] w-full rounded-b-3xl'
       />
       <DetailsCard {...meal} />
-      <Ingredients ingredients={meal.ingredients} />
-      <CookingSteps cookingSteps={meal.steps} />
-    </View>
+      <View className='-translate-y-16'>
+        <Ingredients ingredients={meal.ingredients} />
+        <CookingSteps cookingSteps={meal.steps} />
+      </View>
+    </ScrollView>
   );
 }
-

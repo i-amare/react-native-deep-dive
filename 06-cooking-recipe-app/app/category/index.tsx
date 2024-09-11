@@ -39,7 +39,7 @@ export default function Category() {
         renderItem={({ item }) => (
           <MealCard {...item} onPress={onMealCardClick} />
         )}
-        className='w-full p-2'
+        className='w-11/12 mx-auto'
       />
     </View>
   );
@@ -58,7 +58,7 @@ function Header({ title }: HeaderProps) {
     <View className='relative flex h-12 flex-row items-center bg-slate-950 px-4'>
       <TouchableOpacity
         onPress={onBackButtonPress}
-        className='absolute inset-0 flex aspect-square w-12 items-center justify-center rounded-full bg-gray-900'
+        className='absolute inset-0 ml-4 flex aspect-square w-10 items-center justify-center rounded-full bg-gray-700'
       >
         <FontAwesome6 name='chevron-left' size={18} color={'white'} />
       </TouchableOpacity>

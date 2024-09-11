@@ -20,9 +20,10 @@ export default function ItemPage() {
         source={{
           uri: meal.imageUrl,
         }}
-        className='aspect-square w-full rounded-b-3xl'
+        className='aspect-[1.15] w-full rounded-b-3xl'
       />
       <DetailsCard {...meal} />
+
     </View>
   );
 }

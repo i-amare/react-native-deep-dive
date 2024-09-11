@@ -8,6 +8,7 @@ export default function HomePage() {
     <View className='flex-1 items-center justify-center bg-gray-950'>
       <FlatList
         data={mealCatagories}
+        keyExtractor={(item) => item.id}
         numColumns={2}
         renderItem={({ item }) => <CategoryCard {...item} />}
         className='w-full'

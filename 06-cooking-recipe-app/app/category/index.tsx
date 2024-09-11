@@ -39,7 +39,8 @@ export default function Category() {
         renderItem={({ item }) => (
           <MealCard {...item} onPress={onMealCardClick} />
         )}
-        className='w-11/12 mx-auto'
+        keyExtractor={(item) => item.id}
+        className='mx-auto w-11/12'
       />
     </View>
   );

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import DetailsCard from './components/detailsCard';
 import CookingSteps from './components/cookingSteps';
+import Ingredients from './components/ingredientsList';
 
 export default function ItemPage() {
   const { mealID } = useLocalSearchParams();
@@ -24,21 +25,9 @@ export default function ItemPage() {
         className='aspect-[1.15] w-full rounded-b-3xl'
       />
       <DetailsCard {...meal} />
-      {/* <Ingredients ingredients={meal.ingredients} /> */}
+      <Ingredients ingredients={meal.ingredients} />
       <CookingSteps cookingSteps={meal.steps} />
     </View>
   );
 }
-
-// type IngredientsProps = {
-//   ingredients: string[];
-// };
-
-// function Ingredients({ ingredients }: IngredientsProps) {
-//   return (
-//     <View>
-//       <Text className='text-white'>{ingredients}</Text>
-//     </View>
-//   );
-// }
 

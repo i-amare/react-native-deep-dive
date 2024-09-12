@@ -1,18 +1,11 @@
 import { MEALS } from '@/data/mealData';
 import Meal from '@/models/meal';
-import { Entypo, FontAwesome6, Ionicons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import DetailsCard from './components/detailsCard';
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import CookingSteps from './components/cookingSteps';
+import DetailsCard from './components/detailsCard';
 import Ingredients from './components/ingredientsList';
 
 export default function ItemPage() {
@@ -25,7 +18,7 @@ export default function ItemPage() {
       headerShown: true,
       headerTransparent: true,
       //@ts-ignore
-      header: () => <Header />,
+      header: () => <Header mealID={mealID} />,
     });
   }, [navigation]);
 
@@ -50,19 +43,66 @@ export default function ItemPage() {
   );
 }
 
-function Header() {
+type HeaderProps = {
+  mealID: string;
+};
+function Header({ mealID }: HeaderProps) {
   const router = useRouter();
+  const [meal, setMeal] = useState<Meal>();
+  const [isFavourite, setIsFavourite] = useState(false);
 
-  const onBackButtonPress = () => router.back();
+  useEffect(() => {
+    setMeal(MEALS.find((value) => mealID === value.id));
+  }, [mealID]);
+
+  useEffect(() => {
+    if (meal) setIsFavourite(meal.isFavourite);
+  }, [meal]);
+
+  useEffect(() => {
+    if (meal) meal.isFavourite = isFavourite;
+  }, [isFavourite]);
+
+  function onBackButtonPress() {
+    router.back();
+  }
+
+  function onSaveButtonPress() {
+    setIsFavourite(!isFavourite);
+  }
+
+  type IconWrapperProps = {
+    icon: React.ReactNode;
+    onPress: () => void;
+  };
+
+  function IconWrapper({ icon, onPress }: IconWrapperProps) {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        className='flex aspect-square w-10 items-center justify-center rounded-full bg-gray-700'
+      >
+        {icon}
+      </TouchableOpacity>
+    );
+  }
 
   return (
-    <View className='relative flex h-12 flex-row items-center px-4'>
-      <TouchableOpacity
+    <View className='flex h-12 w-full flex-row items-center justify-between p-4'>
+      <IconWrapper
+        icon={<FontAwesome6 name='chevron-left' size={18} color={'white'} />}
         onPress={onBackButtonPress}
-        className='absolute inset-0 ml-4 flex aspect-square w-10 items-center justify-center rounded-full bg-gray-700'
-      >
-        <FontAwesome6 name='chevron-left' size={18} color={'white'} />
-      </TouchableOpacity>
+      />
+      <IconWrapper
+        icon={
+          isFavourite ? (
+            <AntDesign name='heart' color={'red'} size={18} />
+          ) : (
+            <AntDesign name='hearto' color={'white'} size={18} />
+          )
+        }
+        onPress={onSaveButtonPress}
+      />
     </View>
   );
 }

@@ -6,9 +6,17 @@ type CookingStepsProps = {
 
 export default function CookingSteps({ cookingSteps }: CookingStepsProps) {
   return (
-    <View className='w-11/12 mx-auto'>
-      <Text className='text-white font-semibold text-lg mb-2'>Cooking Steps</Text>
-			{cookingSteps.map((cookingStep, index) => <CookingStep cookingStep={cookingStep} index={index} />)}
+    <View className='mx-auto w-11/12'>
+      <Text className='mb-2 text-lg font-semibold text-white'>
+        Cooking Steps
+      </Text>
+      {cookingSteps.map((cookingStep, index) => (
+        <CookingStep
+          key={`${index}-${Math.random()}`}
+          cookingStep={cookingStep}
+          index={index}
+        />
+      ))}
     </View>
   );
 }

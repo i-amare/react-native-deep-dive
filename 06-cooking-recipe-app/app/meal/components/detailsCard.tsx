@@ -12,7 +12,7 @@ export default function DetailsCard({
   duration,
 }: DetailsCardProps) {
   return (
-    <View className='mx-auto min-h-40 w-11/12 flex justify-between -translate-y-20 rounded-2xl bg-gray-900 p-4'>
+    <View className='min-h-40 mx-auto flex w-11/12 -translate-y-20 justify-between rounded-2xl bg-gray-900 p-4'>
       <View className='mb-4'>
         <Text className='text-center text-3xl font-semibold text-white'>
           {title}

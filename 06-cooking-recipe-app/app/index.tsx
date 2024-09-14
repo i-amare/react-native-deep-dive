@@ -1,7 +1,6 @@
-import { FlatList, Text, View } from 'react-native';
 import { CATEGORIES as mealCatagories } from '@/data/mealData';
+import { FlatList, View } from 'react-native';
 import CategoryCard from './components/categoryCard';
-import { useLocalSearchParams } from 'expo-router';
 
 export default function HomePage() {
   return (

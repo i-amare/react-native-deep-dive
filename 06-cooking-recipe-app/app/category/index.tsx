@@ -1,9 +1,9 @@
 import { MEALS } from '@/data/mealData';
+import { FontAwesome6 } from '@expo/vector-icons';
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import MealCard from './components/mealCard';
-import { useEffect } from 'react';
-import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function Category() {
   const { categoryId, categoryTitle } = useLocalSearchParams();

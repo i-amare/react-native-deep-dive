@@ -1,5 +1,10 @@
 import { Stack } from 'expo-router';
+import { NativeWindStyleSheet } from 'nativewind';
 import { SafeAreaView } from 'react-native';
+
+NativeWindStyleSheet.setOutput({
+  default: 'native',
+});
 
 export default function RootLayout() {
   return (

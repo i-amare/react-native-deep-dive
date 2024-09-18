@@ -9,7 +9,7 @@ type FavouriteMealsContextType = {
   isFavourite: (mealID: string) => boolean;
 };
 
-const FavouriteMealsContext = createContext<FavouriteMealsContextType>({
+export const FavouriteMealsContext = createContext<FavouriteMealsContextType>({
   favouriteMeals: [],
   addFavouriteMeal: (mealID: string) => {},
   removeFavouriteMeal: (mealID: string) => {},

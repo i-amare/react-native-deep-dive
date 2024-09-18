@@ -2,11 +2,12 @@ import { MEALS } from '@/data/mealData';
 import Meal from '@/models/meal';
 import { AntDesign, FontAwesome6 } from '@expo/vector-icons';
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native';
 import CookingSteps from './components/cookingSteps';
 import DetailsCard from './components/detailsCard';
 import Ingredients from './components/ingredientsList';
+import { FavouriteMealsContext } from '../context/FavouriteMealsContext';
 
 export default function ItemPage() {
   const { mealID } = useLocalSearchParams();
@@ -48,27 +49,16 @@ type HeaderProps = {
 };
 function Header({ mealID }: HeaderProps) {
   const router = useRouter();
-  const [meal, setMeal] = useState<Meal>();
-  const [isFavourite, setIsFavourite] = useState(false);
-
-  useEffect(() => {
-    setMeal(MEALS.find((value) => mealID === value.id));
-  }, [mealID]);
-
-  useEffect(() => {
-    if (meal) setIsFavourite(meal.isFavourite);
-  }, [meal]);
-
-  useEffect(() => {
-    if (meal) meal.isFavourite = isFavourite;
-  }, [isFavourite]);
+  const FavouriteMeals = useContext(FavouriteMealsContext);
 
   function onBackButtonPress() {
     router.back();
   }
 
   function onSaveButtonPress() {
-    setIsFavourite(!isFavourite);
+    if (FavouriteMeals.isFavourite(mealID))
+      FavouriteMeals.removeFavouriteMeal(mealID);
+    else FavouriteMeals.addFavouriteMeal(mealID);
   }
 
   type IconWrapperProps = {
@@ -95,7 +85,7 @@ function Header({ mealID }: HeaderProps) {
       />
       <IconWrapper
         icon={
-          isFavourite ? (
+          FavouriteMeals.isFavourite(mealID) ? (
             <AntDesign name='heart' color={'red'} size={18} />
           ) : (
             <AntDesign name='hearto' color={'white'} size={18} />

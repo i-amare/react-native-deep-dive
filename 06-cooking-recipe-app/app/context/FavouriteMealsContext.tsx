@@ -4,37 +4,49 @@ import { createContext, useState } from 'react';
 
 type FavouriteMealsContextType = {
   favouriteMeals: Meal[];
-  addFavourite: (mealID: string) => void;
-  removeFavourite: (mealID: string) => void;
+  addFavouriteMeal: (mealID: string) => void;
+  removeFavouriteMeal: (mealID: string) => void;
+  isFavourite: (mealID: string) => boolean;
 };
 
-export const FavouriteMealsContext = createContext<FavouriteMealsContextType>({
+const FavouriteMealsContext = createContext<FavouriteMealsContextType>({
   favouriteMeals: [],
-  addFavourite: (mealID: string) => {},
-  removeFavourite: (mealID: string) => {},
+  addFavouriteMeal: (mealID: string) => {},
+  removeFavouriteMeal: (mealID: string) => {},
+  isFavourite: (mealID: string) => false,
 });
 
-export function FavouriteMealsProvider({
+export function FavouriteMealsContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [favouriteMeals, setFavouriteMeals] = useState<Meal[]>([]);
 
-  function addFavourite(mealID: string) {
-    setFavouriteMeals((prev: Meal[]) => {
-      const meal = MEALS.find((val) => val.id === mealID);
-      return meal === undefined ? prev : [...prev, meal];
-    });
+  function addFavouriteMeal(mealID: string) {
+    const meal = MEALS.find((val) => val.id === mealID);
+    if (meal !== undefined) setFavouriteMeals((prev) => [...prev, meal]);
   }
 
-  function removeFavourite(mealID: string) {
-    setFavouriteMeals((prev) => prev.filter((value) => value.id !== mealID));
+  function removeFavouriteMeal(mealID: string) {
+    setFavouriteMeals((prev) => prev.filter((val) => val.id !== mealID));
+  }
+
+  function isFavourite(mealID: string) {
+    for (const meal of favouriteMeals) {
+      if (mealID === meal.id) return true;
+    }
+    return false;
   }
 
   return (
     <FavouriteMealsContext.Provider
-      value={{ favouriteMeals, addFavourite, removeFavourite }}
+      value={{
+        favouriteMeals,
+        isFavourite,
+        addFavouriteMeal,
+        removeFavouriteMeal,
+      }}
     >
       {children}
     </FavouriteMealsContext.Provider>

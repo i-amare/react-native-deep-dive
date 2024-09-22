@@ -5,7 +5,7 @@ export default function TabsLayout() {
   return (
     <Tabs>
       <Tabs.Screen
-        name='index'
+        name='home-screen/index'
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
@@ -13,15 +13,15 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name='history'
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name='history' color={'black'} size={24} />
-          ),
-        }}
-      />
+			<Tabs.Screen
+				name='history-screen/index'
+				options={{
+					title: 'History',
+					tabBarIcon: ({ color }) => (
+						<FontAwesome name='history' color={'black'} size={24} />
+					),
+				}}
+			/>
     </Tabs>
   );
 }

@@ -6,20 +6,21 @@ export default function TabBar({
   navigation,
   descriptors,
 }: BottomTabBarProps) {
-
   return (
-    <View className='absolute bottom-0 left-0 w-full'>
-      <View className='mx-auto mb-8 flex flex-row justify-evenly rounded-xl bg-slate-800 p-4'>
+    <View className='absolute bottom-0 left-0 flex w-full flex-row items-start justify-start'>
+      <View className='mx-auto mb-12 flex flex-row justify-evenly rounded-3xl bg-gray-950 py-4'>
         {state.routes.map((route, index) => {
+          const colour = state.index === index ? 'white' : 'gray';
+
           return (
             <TouchableOpacity
               key={index}
-              className='mx-2 flex-1 items-center'
+              className='flex mx-6 items-center justify-center'
               onPress={() => navigation.navigate(route.name)}
             >
               {
                 // @ts-ignore
-                descriptors[route.key].options.tabBarIcon({ color: 'white' })
+                descriptors[route.key].options.tabBarIcon({ color: colour })
               }
             </TouchableOpacity>
           );

@@ -33,7 +33,11 @@ function BottomSheet() {
     })
     .onUpdate((event) => {
       const yTranslation = event.translationY + context.value.y;
-      translateY.value = Math.max(yTranslation, -SCREEN_HEIGHT / 2.75);
+      const min = -SCREEN_HEIGHT / 2.75 + 75;
+      const max = SCREEN_HEIGHT / 7.25 - 75;
+      if (yTranslation > min && yTranslation < max) {
+        translateY.value = Math.max(yTranslation, -SCREEN_HEIGHT / 2.75 + 75);
+      }
     });
 
   return (

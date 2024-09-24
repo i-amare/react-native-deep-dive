@@ -17,6 +17,8 @@ function BottomSheet() {
   const { height: SCREEN_HEIGHT } = Dimensions.get('window');
   const sheetPosition = SCREEN_HEIGHT / 2.75;
 
+  const context = useSharedValue({ y: 0 });
+
   const translateY = useSharedValue(0);
 
   const rBottomSheet = useAnimatedStyle(() => {
@@ -25,9 +27,14 @@ function BottomSheet() {
     };
   });
 
-  const gesture = Gesture.Pan().onUpdate((event) => {
-    translateY.value = event.translationY;
-  });
+  const gesture = Gesture.Pan()
+    .onStart(() => {
+      context.value = { y: translateY.value };
+    })
+    .onUpdate((event) => {
+      const yTranslation = event.translationY + context.value.y;
+      translateY.value = Math.max(yTranslation, -SCREEN_HEIGHT / 2.75);
+    });
 
   return (
     <GestureDetector gesture={gesture}>

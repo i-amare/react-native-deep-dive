@@ -2,10 +2,10 @@ import expenses from '@/assets/data/data';
 import { Account, Transaction } from '@/types/Account';
 import { createContext, useEffect, useState } from 'react';
 
-export interface AccountContextType extends Account {
+export type AccountContextType = Account & {
   addTransaction: (transaction: Transaction) => void;
   removeTransaction: (transactionID: string) => void;
-}
+};
 
 export const AccountContext = createContext<AccountContextType>({
   balance: 0,

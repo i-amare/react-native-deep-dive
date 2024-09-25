@@ -1,5 +1,5 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 export default function TabBar({
   state,
@@ -15,7 +15,7 @@ export default function TabBar({
           return (
             <TouchableOpacity
               key={index}
-              className='flex mx-6 items-center justify-center'
+              className='mx-6 flex items-center justify-center'
               onPress={() => navigation.navigate(route.name)}
             >
               {

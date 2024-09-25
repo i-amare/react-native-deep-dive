@@ -1,8 +1,15 @@
-import { Dimensions, View } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import { Dimensions, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 
-export default function BottomSheet({ children }: { children?: React.ReactNode }) {
+export default function BottomSheet({
+  children,
+}: {
+  children?: React.ReactNode;
+}) {
   const { height: SCREEN_HEIGHT } = Dimensions.get('window');
   const sheetPosition = SCREEN_HEIGHT / 2.75;
 

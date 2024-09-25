@@ -1,5 +1,5 @@
 import { Transaction } from '@/types/Account';
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 type TransactionListProps = {
   data: Transaction[];
@@ -8,19 +8,27 @@ type TransactionListProps = {
 export default function TransactionList({ data }: TransactionListProps) {
   return (
     <FlatList
-      className='flex-1'
+      className='w-screen flex-1'
       data={data}
       renderItem={({ item }) => <TransactionItem {...item} />}
+      ListFooterComponent={<View className='h-[40vh] bg-red-400' />}
     />
   );
 }
 
 type TransactionProps = Transaction;
 
-function TransactionItem({ id, amount, date, description }: TransactionProps) {
+function TransactionItem({
+  id,
+  name,
+  amount,
+  date,
+  category,
+  description,
+}: TransactionProps) {
   return (
     <Text>
-      {amount} - {description}
+      {name} - {amount} - {description} - {category} - {date.getDate()}
     </Text>
   );
 }

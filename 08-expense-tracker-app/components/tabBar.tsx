@@ -1,5 +1,5 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { TouchableOpacity, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 export default function TabBar({
   state,
@@ -13,16 +13,16 @@ export default function TabBar({
           const colour = state.index === index ? 'white' : 'gray';
 
           return (
-            <TouchableOpacity
+            <Pressable
               key={index}
-              className='mx-6 flex items-center justify-center'
+              className='mx-6 flex items-center justify-center transition-all duration-700 active:scale-90 active:opacity-75'
               onPress={() => navigation.navigate(route.name)}
             >
               {
                 // @ts-ignore
                 descriptors[route.key].options.tabBarIcon({ color: colour })
               }
-            </TouchableOpacity>
+            </Pressable>
           );
         })}
       </View>

@@ -39,7 +39,7 @@ export default function BottomSheet({
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View
-        style={[{ top: sheetPosition }, { ...rBottomSheet }]}
+        style={[{ top: sheetPosition, left: 0 }, { ...rBottomSheet }]}
         className='absolute h-screen w-screen flex-1 rounded-t-3xl bg-white'
       >
         <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-gray-950' />

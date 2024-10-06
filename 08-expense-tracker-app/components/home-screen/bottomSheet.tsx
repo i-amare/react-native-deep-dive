@@ -10,8 +10,10 @@ export default function BottomSheet({
 }: {
   children?: React.ReactNode;
 }) {
+  const VH_RATIO = 4;
+
   const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-  const sheetPosition = SCREEN_HEIGHT / 2.75;
+  const sheetPosition = SCREEN_HEIGHT / VH_RATIO;
 
   const context = useSharedValue({ y: 0 });
 
@@ -29,8 +31,8 @@ export default function BottomSheet({
     })
     .onUpdate((event) => {
       const yTranslation = event.translationY + context.value.y;
-      const min = -SCREEN_HEIGHT / 2.75 + 75;
-      const max = SCREEN_HEIGHT / 7.25 - 75;
+      const min = -SCREEN_HEIGHT / VH_RATIO + 75;
+      const max = SCREEN_HEIGHT / (10 - VH_RATIO) - 75;
       if (yTranslation > min && yTranslation < max) {
         translateY.value = yTranslation;
       }

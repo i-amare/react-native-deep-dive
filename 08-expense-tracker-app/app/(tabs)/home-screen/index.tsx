@@ -3,13 +3,13 @@ import BottomSheet from '@/components/home-screen/bottomSheet';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
 import { useContext } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 export default function HomeScreen() {
   const accountContext = useContext(AccountContext);
 
   return (
-    <View className='flex-1 items-center bg-gray-950'>
+    <View className='flex-1 items-center bg-green-900'>
       <AccountCard balance={accountContext.balance} />
       <BottomSheet>
         <TransactionList data={accountContext.transactionHistory} />
@@ -17,4 +17,3 @@ export default function HomeScreen() {
     </View>
   );
 }
-

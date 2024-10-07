@@ -2,7 +2,7 @@ import AccountCard from '@/components/home-screen/accountCard';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
 import { useContext } from 'react';
-import { Dimensions, SafeAreaView, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
@@ -11,13 +11,11 @@ import Animated, {
 
 const SCROLL_RATIO = 1.5;
 const CARD_TRANSLATION = 50;
+const MAX_SCROLL = 75;
+const MIN_SCROLL = -125;
 
 export default function HomeScreen() {
   const accountContext = useContext(AccountContext);
-
-  const { height: SCREEN_HEIGHT } = Dimensions.get('window');
-  const MAX_SCROLL = 75;
-  const MIN_SCROLL = -125;
 
   const scrollContext = useSharedValue(0);
   const translateY = useSharedValue(0);

@@ -2,7 +2,7 @@ import AccountCard from '@/components/home-screen/accountCard';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
 import { useContext } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 const SCROLL_RATIO = 1.5;
-const CARD_TRANSLATION = 50;
+const CARD_TRANSLATION = 75;
 const MAX_SCROLL = 75;
 const MIN_SCROLL = -125;
 
@@ -42,7 +42,12 @@ export default function HomeScreen() {
   }));
 
   return (
-    <SafeAreaView className='flex-1 items-center bg-green-900 pt-14'>
+    <SafeAreaView className='relative flex-1 items-center bg-green-900 pt-14'>
+      <Image
+        source={require('@/assets/images/bg-image.jpg')}
+        resizeMode='stretch'
+        className='absolute left-0 top-0 h-[40vh] w-full'
+      />
       <Animated.View style={slowScroll} className='w-full'>
         <AccountCard balance={accountContext.balance} />
       </Animated.View>
@@ -52,6 +57,7 @@ export default function HomeScreen() {
           className='h-screen w-full rounded-3xl bg-white'
         >
           <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-gray-950' />
+          <Text className='px-4 text-2xl font-semibold'>Transactions</Text>
           <TransactionList data={accountContext.transactionHistory} />
         </Animated.View>
       </GestureDetector>

@@ -1,6 +1,7 @@
 import AccountCard from '@/components/home-screen/accountCard';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
+import { BlurView } from 'expo-blur';
 import { useContext } from 'react';
 import { Image, SafeAreaView, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
@@ -42,11 +43,11 @@ export default function HomeScreen() {
   }));
 
   return (
-    <SafeAreaView className='relative flex-1 items-center bg-green-900 pt-14'>
+    <SafeAreaView className='relative flex-1 items-centerpt-14'>
       <Image
         source={require('@/assets/images/bg-image.jpg')}
         resizeMode='stretch'
-        className='absolute left-0 top-0 h-[40vh] w-full'
+        className='absolute left-0 top-0 h-screen w-full'
       />
       <Animated.View style={slowScroll} className='w-full'>
         <AccountCard balance={accountContext.balance} />
@@ -54,11 +55,14 @@ export default function HomeScreen() {
       <GestureDetector gesture={panGesture}>
         <Animated.View
           style={fastScroll}
-          className='h-screen w-full rounded-3xl bg-white'
+          className='h-screen w-full rounded-3xl overflow-hidden bg-white/5'
         >
-          <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-gray-950' />
-          <Text className='px-4 text-2xl font-semibold'>Transactions</Text>
-          <TransactionList data={accountContext.transactionHistory} />
+          <BlurView className='h-full w-full'
+          intensity={80}>
+            <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-white' />
+            <Text className='px-4 text-2xl text-white font-semibold'>Transactions</Text>
+            <TransactionList data={accountContext.transactionHistory} />
+          </BlurView>
         </Animated.View>
       </GestureDetector>
     </SafeAreaView>

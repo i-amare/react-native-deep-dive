@@ -1,5 +1,4 @@
-import { AntDesign, Feather, MaterialIcons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
 
 interface AccountCardProps {
@@ -11,24 +10,13 @@ export default function AccountCard({ balance }: AccountCardProps) {
     <View className='w-full'>
       <View className='flex aspect-[4/2] w-full rounded-3xl bg-black px-4 pt-6'>
         <View className='flex flex-row'>
-          <View className='mr-4 overflow-hidden rounded-full'>
-            <BlurView
-              intensity={10}
-              tint='extraLight'
-              className='flex aspect-square h-12 items-center justify-center rounded-full'
-            >
-              <MaterialIcons
-                name='account-balance-wallet'
-                size={26}
-                color='white'
-              />
-            </BlurView>
-          </View>
           <View className='flex'>
-            <Text className='text-4xl font-semibold text-white'>
-              R{balance.toFixed(2)}
+            <Text className='text-4xl text-white'>
+              {new Intl.NumberFormat(undefined, {
+                style: 'currency',
+                currency: 'ZAR',
+              }).format(balance)}
             </Text>
-            <Text className='font-semibold text-gray-400'>Account Balance</Text>
           </View>
         </View>
         <View className='mt-3 flex flex-row'>

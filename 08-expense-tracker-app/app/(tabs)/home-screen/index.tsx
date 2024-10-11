@@ -1,9 +1,10 @@
 import AccountCard from '@/components/home-screen/accountCard';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
+import { ModalContext } from '@/context/ModalContext';
 import { BlurView } from 'expo-blur';
 import { useContext } from 'react';
-import { Image, SafeAreaView, Text, View } from 'react-native';
+import { Image, Modal, SafeAreaView, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
@@ -17,6 +18,7 @@ const MIN_SCROLL = -125;
 
 export default function HomeScreen() {
   const accountContext = useContext(AccountContext);
+  const modalContext = useContext(ModalContext);
 
   const scrollContext = useSharedValue(0);
   const translateY = useSharedValue(0);
@@ -43,7 +45,7 @@ export default function HomeScreen() {
   }));
 
   return (
-    <SafeAreaView className='relative flex-1 items-centerpt-14'>
+    <SafeAreaView className='relative flex-1 items-center pt-14'>
       <Image
         source={require('@/assets/images/bg-image.jpg')}
         resizeMode='stretch'
@@ -55,16 +57,22 @@ export default function HomeScreen() {
       <GestureDetector gesture={panGesture}>
         <Animated.View
           style={fastScroll}
-          className='h-screen w-full rounded-3xl overflow-hidden bg-white/5'
+          className='h-screen w-full overflow-hidden rounded-3xl bg-white/5'
         >
-          <BlurView className='h-full w-full'
-          intensity={80}>
+          <BlurView className='h-full w-full' intensity={80}>
             <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-white' />
-            <Text className='px-4 text-2xl text-white font-semibold'>Transactions</Text>
+            <Text className='px-4 text-2xl font-semibold text-white'>
+              Transactions
+            </Text>
             <TransactionList data={accountContext.transactionHistory} />
           </BlurView>
         </Animated.View>
       </GestureDetector>
+      <Modal
+        animationType='slide'
+        visible={modalContext.isVisible}
+        onTouchEnd={() => modalContext.setIsVisible(false)}
+      ></Modal>
     </SafeAreaView>
   );
 }

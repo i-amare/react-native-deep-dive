@@ -1,4 +1,6 @@
+import { ModalContext } from '@/context/ModalContext';
 import { AntDesign, Feather } from '@expo/vector-icons';
+import { useContext } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 interface AccountCardProps {
@@ -6,6 +8,8 @@ interface AccountCardProps {
 }
 
 export default function AccountCard({ balance }: AccountCardProps) {
+  const modalContext = useContext(ModalContext);
+
   return (
     <View className='w-full'>
       <View className='flex aspect-[4/2] w-full rounded-3xl bg-black px-4 pt-6'>
@@ -27,8 +31,8 @@ export default function AccountCard({ balance }: AccountCardProps) {
           />
           <View className='mr-2'></View>
           <Button
-            text='Send Money'
-            onPress={() => null}
+            text='Add Expense' 
+            onPress={() => modalContext.setIsVisible(true)}
             icon={<Feather name='arrow-up-right' color='white' size={12} />}
           />
         </View>

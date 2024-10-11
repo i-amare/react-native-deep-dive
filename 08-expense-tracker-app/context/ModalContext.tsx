@@ -2,13 +2,13 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 export type ModalContextType = {
   isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>> | null;
+  setIsVisible: Dispatch<SetStateAction<boolean>> | (() => void);
   toggleVisibility: () => void;
 };
 
 export const ModalContext = createContext<ModalContextType>({
   isVisible: false,
-  setIsVisible: null,
+  setIsVisible: () => {},
   toggleVisibility: () => {},
 });
 

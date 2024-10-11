@@ -1,4 +1,5 @@
 import AccountCard from '@/components/home-screen/accountCard';
+import AddExpenseModal from '@/components/home-screen/addExpenseModal';
 import TransactionList from '@/components/home-screen/transactionList';
 import { AccountContext } from '@/context/AccountContext';
 import { ModalContext } from '@/context/ModalContext';
@@ -69,10 +70,12 @@ export default function HomeScreen() {
         </Animated.View>
       </GestureDetector>
       <Modal
-        animationType='slide'
         visible={modalContext.isVisible}
         onTouchEnd={() => modalContext.setIsVisible(false)}
-      ></Modal>
+        transparent={true}
+      >
+        <AddExpenseModal />
+      </Modal>
     </SafeAreaView>
   );
 }

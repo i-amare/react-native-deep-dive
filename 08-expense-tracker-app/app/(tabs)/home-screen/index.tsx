@@ -19,7 +19,6 @@ const MIN_SCROLL = -125;
 
 export default function HomeScreen() {
   const accountContext = useContext(AccountContext);
-  const modalContext = useContext(ModalContext);
 
   const scrollContext = useSharedValue(0);
   const translateY = useSharedValue(0);
@@ -69,13 +68,6 @@ export default function HomeScreen() {
           </BlurView>
         </Animated.View>
       </GestureDetector>
-      <Modal
-        visible={modalContext.isVisible}
-        onTouchEnd={() => modalContext.setIsVisible(false)}
-        transparent={true}
-      >
-        <AddExpenseModal />
-      </Modal>
     </SafeAreaView>
   );
 }

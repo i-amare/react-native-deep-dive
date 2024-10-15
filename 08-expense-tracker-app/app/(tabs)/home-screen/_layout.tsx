@@ -1,7 +1,5 @@
-import HomeScreen from ".";
-
+import { Stack } from 'expo-router';
 
 export default function HomeScreenLayout() {
-	
-  return <HomeScreen />;
+  return <Stack screenOptions={{ header: () => null }} />;
 }

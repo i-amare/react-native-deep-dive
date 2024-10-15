@@ -1,6 +1,5 @@
-import { ModalContext } from '@/context/ModalContext';
 import { AntDesign, Feather } from '@expo/vector-icons';
-import { useContext } from 'react';
+import { useRouter } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 
 interface AccountCardProps {
@@ -8,7 +7,7 @@ interface AccountCardProps {
 }
 
 export default function AccountCard({ balance }: AccountCardProps) {
-  const modalContext = useContext(ModalContext);
+  const router = useRouter();
 
   return (
     <View className='w-full'>
@@ -31,8 +30,8 @@ export default function AccountCard({ balance }: AccountCardProps) {
           />
           <View className='mr-2'></View>
           <Button
-            text='Add Expense' 
-            onPress={() => modalContext.setIsVisible(true)}
+            text='Add Expense'
+            onPress={() => router.navigate('home-screen/add-expense')}
             icon={<Feather name='arrow-up-right' color='white' size={12} />}
           />
         </View>

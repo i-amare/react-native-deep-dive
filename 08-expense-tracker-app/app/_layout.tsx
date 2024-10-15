@@ -1,5 +1,4 @@
 import { AccountContextProvider } from '@/context/AccountContext';
-import ModalContextProvider from '@/context/ModalContext';
 import { Slot, useRouter } from 'expo-router';
 import { NativeWindStyleSheet } from 'nativewind';
 import { useEffect } from 'react';
@@ -17,11 +16,9 @@ export default function RootLayout() {
 
   return (
     <AccountContextProvider>
-      <ModalContextProvider>
-        <GestureHandlerRootView className='flex-1'>
-          <Slot />
-        </GestureHandlerRootView>
-      </ModalContextProvider>
+      <GestureHandlerRootView className='flex-1'>
+        <Slot />
+      </GestureHandlerRootView>
     </AccountContextProvider>
   );
 }

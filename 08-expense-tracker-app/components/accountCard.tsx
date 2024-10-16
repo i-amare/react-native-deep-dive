@@ -31,7 +31,7 @@ export default function AccountCard({ balance }: AccountCardProps) {
           <View className='mr-2'></View>
           <Button
             text='Add Expense'
-            onPress={() => router.navigate('home-screen/add-expense')}
+            onPress={() => router.push('/home-screen/add-expense')}
             icon={<Feather name='arrow-up-right' color='white' size={12} />}
           />
         </View>

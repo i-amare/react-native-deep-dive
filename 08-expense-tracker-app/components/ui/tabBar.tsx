@@ -2,12 +2,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Pressable, View } from 'react-native';
 
-export default function TabBar({
-  state,
-  navigation,
-  descriptors,
-}: BottomTabBarProps) {
-  console.log(state, descriptors);
+export default function TabBar({ state, navigation }: BottomTabBarProps) {
   return (
     <View className='absolute bottom-0 left-0 flex w-full flex-row items-start justify-start'>
       <View className='mx-auto mb-12 flex flex-row justify-evenly rounded-3xl bg-gray-950 py-4'>

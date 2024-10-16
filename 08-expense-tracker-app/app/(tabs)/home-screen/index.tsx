@@ -1,11 +1,9 @@
-import AccountCard from '@/components/home-screen/accountCard';
-import AddExpenseModal from '@/components/home-screen/addExpenseModal';
-import TransactionList from '@/components/home-screen/transactionList';
+import AccountCard from '@/components/accountCard';
+import TransactionList from '@/components/transactionList';
 import { AccountContext } from '@/context/AccountContext';
-import { ModalContext } from '@/context/ModalContext';
 import { BlurView } from 'expo-blur';
 import { useContext } from 'react';
-import { Image, Modal, SafeAreaView, Text, View } from 'react-native';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,

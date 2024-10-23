@@ -25,7 +25,7 @@ export default function AccountCard({ balance }: AccountCardProps) {
         <View className='mt-3 flex flex-row'>
           <Button
             text='Top Up'
-            onPress={() => null}
+            onPress={() => router.push('/home-screen/top-up')}
             icon={<AntDesign name='plus' color='white' size={12} />}
           />
           <View className='mr-2'></View>

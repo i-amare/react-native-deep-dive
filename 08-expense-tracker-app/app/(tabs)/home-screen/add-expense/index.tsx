@@ -1,4 +1,5 @@
 import NumericKeyboard from '@/components/ui/numericKeyboard';
+import NumericTextBox from '@/components/ui/numericTextBox';
 import PageHeader from '@/components/ui/pageHeader';
 import { useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -24,7 +25,8 @@ export default function AddExpenseScreen() {
   }, []);
 
   return (
-    <View className='flex-1 bg-gray-950'>
+    <View className='flex-1 justify-center bg-gray-950'>
+      <NumericTextBox value={text} />
       <NumericKeyboard onBackSpace={onBackSpace} onKeyPress={onKeyPress} />
     </View>
   );

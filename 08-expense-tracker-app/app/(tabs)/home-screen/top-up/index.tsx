@@ -1,4 +1,5 @@
 import NumericKeyboard from '@/components/ui/numericKeyboard';
+import NumericTextBox from '@/components/ui/numericTextBox';
 import PageHeader from '@/components/ui/pageHeader';
 import { useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
@@ -25,7 +26,8 @@ export default function TopUpScreen() {
   }, []);
 
   return (
-    <View className='flex-1 bg-gray-950'>
+    <View className='flex-1 bg-gray-950 justify-center'>
+      <NumericTextBox value={text} />
       <NumericKeyboard onBackSpace={onBackSpace} onKeyPress={onKeyPress} />
     </View>
   );

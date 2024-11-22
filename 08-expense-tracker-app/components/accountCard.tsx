@@ -1,17 +1,23 @@
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 interface AccountCardProps {
   balance: number;
   setModalVisibility: (value: boolean) => void;
+  slowScroll: any;
 }
 
-export default function AccountCard({ balance, setModalVisibility }: AccountCardProps) {
+export default function AccountCard({
+  balance,
+  setModalVisibility,
+  slowScroll,
+}: AccountCardProps) {
   const router = useRouter();
 
   return (
-    <View className='w-full'>
+    <Animated.View style={slowScroll} className='w-full'>
       <View className='flex aspect-[4/2] w-full rounded-3xl bg-black px-4 pt-6'>
         <View className='flex flex-row'>
           <View className='flex'>
@@ -37,7 +43,7 @@ export default function AccountCard({ balance, setModalVisibility }: AccountCard
           />
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 

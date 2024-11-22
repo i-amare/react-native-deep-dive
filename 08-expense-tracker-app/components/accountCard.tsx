@@ -4,9 +4,10 @@ import { Pressable, Text, View } from 'react-native';
 
 interface AccountCardProps {
   balance: number;
+  setModalVisibility: (value: boolean) => void;
 }
 
-export default function AccountCard({ balance }: AccountCardProps) {
+export default function AccountCard({ balance, setModalVisibility }: AccountCardProps) {
   const router = useRouter();
 
   return (
@@ -25,13 +26,13 @@ export default function AccountCard({ balance }: AccountCardProps) {
         <View className='mt-3 flex flex-row'>
           <Button
             text='Top Up'
-            onPress={() => router.push('/home-screen/top-up')}
+            onPress={() => setModalVisibility(true)}
             icon={<AntDesign name='plus' color='white' size={12} />}
           />
           <View className='mr-2'></View>
           <Button
             text='Add Expense'
-            onPress={() => router.push('/home-screen/add-expense')}
+            onPress={() => setModalVisibility(true)}
             icon={<Feather name='arrow-up-right' color='white' size={12} />}
           />
         </View>

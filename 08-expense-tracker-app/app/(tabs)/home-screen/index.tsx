@@ -1,8 +1,9 @@
 import AccountCard from '@/components/accountCard';
+import Modal from '@/components/modal';
 import TransactionList from '@/components/transactionList';
 import { AccountContext } from '@/context/AccountContext';
 import { BlurView } from 'expo-blur';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Image, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -63,6 +64,10 @@ const useModalAnimation = () => {
     modalScrollContext.value = modalScrollContext.value === 0 ? 100 : 0;
   };
 
+  const setModalVisibility = (isVisible: boolean) => {
+    modalScrollContext.value = isVisible ? 0 : 100;
+  };
+
   const modalAnimation = useAnimatedStyle(() => ({
     transform: [
       {
@@ -74,7 +79,7 @@ const useModalAnimation = () => {
     ],
   }));
 
-  return { toggleModal, modalAnimation };
+  return { toggleModal, modalAnimation, setModalVisibility };
 };
 
 // Components
@@ -100,7 +105,7 @@ const TransactionPanel = ({
       style={fastScroll}
       className='h-screen w-full overflow-hidden rounded-3xl bg-white/5'
     >
-      <BlurView className='h-full w-full' intensity={80} tint="dark">
+      <BlurView className='h-full w-full' intensity={80} tint='dark'>
         <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-white' />
         <Text className='px-4 text-2xl font-semibold text-white'>
           Transactions
@@ -114,15 +119,18 @@ const TransactionPanel = ({
 // Main component
 export default function HomeScreen() {
   const { balance, transactionHistory } = useContext(AccountContext);
-  const [modalIsVisible, setModalIsVisible] = useState(false);
   const { panGesture, fastScroll, slowScroll } = useScrollAnimation();
-  const { toggleModal, modalAnimation } = useModalAnimation();
+  const { toggleModal, modalAnimation, setModalVisibility } =
+    useModalAnimation();
 
   return (
     <SafeAreaView className='relative flex-1 items-center pt-14'>
       <Background />
       <Animated.View style={slowScroll} className='w-full'>
-        <AccountCard balance={balance} />
+        <AccountCard
+          setModalVisibility={setModalVisibility}
+          balance={balance}
+        />
       </Animated.View>
       <TransactionPanel
         fastScroll={fastScroll}
@@ -131,8 +139,10 @@ export default function HomeScreen() {
       />
       <Animated.View
         style={modalAnimation}
-        className='absolute bottom-0 h-[90vh] w-full rounded-t-3xl bg-white'
-      />
+        className='absolute bottom-0 h-full w-full'
+      >
+        <Modal toggleModal={toggleModal} />
+      </Animated.View>
       <Pressable
         onPress={toggleModal}
         className='absolute left-0 right-0 top-0 m-auto h-8 w-16 rounded-xl bg-red-400'

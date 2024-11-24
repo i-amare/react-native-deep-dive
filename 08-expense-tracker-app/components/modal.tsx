@@ -35,7 +35,7 @@ export default function Modal({
         className='h-[10vh] max-h-16 w-full'
         onPressIn={() => setModalVisibility(false)}
       />
-      <View className='flex-1 justify-start rounded-t-3xl bg-gray-950'>
+      <View className='flex-1 justify-between rounded-t-3xl bg-gray-950'>
         <PageHeader
           onClick={() => setModalVisibility(false)}
           title={modalState === 'Income' ? 'Add Income' : 'Add Expense'}

@@ -26,7 +26,7 @@ export default function NumericKeyboard({
   onBackSpace,
 }: NumericKeyboardProps) {
   return (
-    <View className='absolute bottom-0 left-0 h-[40vh] w-full border-t-2 border-t-gray-800'>
+    <View className='h-[40vh] w-full border-t-2 border-t-gray-800'>
       <View className='flex h-full flex-row flex-wrap'>
         {keyValues.map((value, idx) =>
           renderKey(idx, value, onBackSpace, onKeyPress),

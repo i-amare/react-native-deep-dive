@@ -18,7 +18,7 @@ export default function Modal({
   setModalVisibility,
   modalState,
 }: ModalProps) {
-  const { addTransaction: addTransactionContext } = useContext(AccountContext);
+  const accountContext = useContext(AccountContext);
 
   const addTransaction = () => {
     const transaction: Transaction = {
@@ -30,7 +30,7 @@ export default function Modal({
       date: new Date(Date.now()),
     };
     setText('');
-    addTransactionContext(transaction);
+    accountContext.addTransaction(transaction);
   };
 
   const [text, setText] = useState('');

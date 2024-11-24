@@ -14,13 +14,12 @@ export default function HomeScreen() {
 
   const { panGesture, fastScroll, slowScroll } = useScrollAnimation();
   const {
-    toggleModal,
     modalAnimation,
-    setModalVisibility: setModalVisibilityAnimation,
+    setModalVisibility: setModalVisibilityWithAnimation,
   } = useModalAnimation();
 
   const setModalVisibility = (value: boolean) => {
-    setModalVisibilityAnimation(value);
+    setModalVisibilityWithAnimation(value);
     setIsVisible(!value);
   };
 

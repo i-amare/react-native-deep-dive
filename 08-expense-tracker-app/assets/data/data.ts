@@ -488,7 +488,7 @@ const expenses = Array.from({ length: 100 }, () => {
     name: item.name,
     description: item.description,
     category: item.category,
-    amount: parseFloat((Math.random() * 1000).toFixed(2)),
+    amount: -parseFloat((Math.random() * 1000).toFixed(2)),
     date: getRandomDate(new Date(2020, 0, 1), new Date()),
   };
 });

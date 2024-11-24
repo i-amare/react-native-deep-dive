@@ -26,7 +26,7 @@ export default function Modal({
       name: '',
       description: '',
       category: '',
-      amount: modalState === 'Income' ? -parseFloat(text) : parseFloat(text),
+      amount: modalState === 'Income' ? parseFloat(text) : -parseFloat(text),
       date: new Date(Date.now()),
     };
     setText('');

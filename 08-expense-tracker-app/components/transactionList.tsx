@@ -42,8 +42,12 @@ function TransactionItem({
             {category}
           </Text>
         </View>
-        <Text className='-translate-y-1 font-semibold text-white'>
-          R{amount}
+        <Text
+          className={`-translate-y-1 font-semibold ${
+            amount > 0 ? 'text-green-400' : 'text-red-400'
+          }`}
+        >
+          {amount > 0 ? `R${amount}` : `-R${Math.abs(amount)}`}
         </Text>
       </View>
     </View>

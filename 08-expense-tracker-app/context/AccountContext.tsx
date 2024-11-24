@@ -31,8 +31,8 @@ export function AccountContextProvider({
   );
 
   function addTransaction(transaction: Transaction) {
-    setTransactionHistory((prev) => [...prev, transaction]);
-    setBalance((prevBalance) => (prevBalance -= transaction.amount));
+    setTransactionHistory((prev) => [transaction, ...prev]);
+    setBalance((prevBalance) => (prevBalance += transaction.amount));
   }
 
   function removeTransaction(transactionID: string) {

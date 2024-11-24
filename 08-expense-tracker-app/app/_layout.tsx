@@ -1,4 +1,5 @@
 import { AccountContextProvider } from '@/context/AccountContext';
+import { NavigationContextProvider } from '@/context/NavigationContext';
 import { Slot, useRouter } from 'expo-router';
 import { NativeWindStyleSheet } from 'nativewind';
 import { useEffect } from 'react';
@@ -15,10 +16,12 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <AccountContextProvider>
-      <GestureHandlerRootView className='flex-1'>
-        <Slot />
-      </GestureHandlerRootView>
-    </AccountContextProvider>
+    <NavigationContextProvider>
+      <AccountContextProvider>
+        <GestureHandlerRootView className='flex-1'>
+          <Slot />
+        </GestureHandlerRootView>
+      </AccountContextProvider>
+    </NavigationContextProvider>
   );
 }

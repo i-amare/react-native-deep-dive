@@ -6,8 +6,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface PageHeaderProps {
   title: string;
+  onClick?: () => void;
 }
-export default function PageHeader({ title }: PageHeaderProps) {
+export default function PageHeader({ title, onClick }: PageHeaderProps) {
   const router = useRouter();
   const safeArea = useSafeAreaInsets();
 
@@ -22,7 +23,7 @@ export default function PageHeader({ title }: PageHeaderProps) {
         </Text>
       </View>
       <Pressable
-        onPress={() => router.back()}
+        onPress={onClick || router.back}
         className='ml-4 overflow-hidden rounded-full'
       >
         <BlurView className='rounded-full p-2'>

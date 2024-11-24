@@ -22,7 +22,7 @@ export default function HomeScreen() {
         className='absolute left-0 top-0 h-screen w-full'
       />
       <AccountCard
-      setModalState={setModalState}
+        setModalState={setModalState}
         slowScroll={slowScroll}
         setModalVisibility={setModalVisibility}
         balance={balance}
@@ -33,9 +33,9 @@ export default function HomeScreen() {
         transactions={transactionHistory}
       />
       <Modal
+        setModalVisibility={setModalVisibility}
         modalState={modalState}
         modalAnimation={modalAnimation}
-        toggleModal={toggleModal}
       />
     </SafeAreaView>
   );

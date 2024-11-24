@@ -1,18 +1,19 @@
 import NumericKeyboard from '@/components/ui/numericKeyboard';
 import NumericTextBox from '@/components/ui/numericTextBox';
 import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import Animated from 'react-native-reanimated';
+import PageHeader from './ui/pageHeader';
 
 interface ModalProps {
+  setModalVisibility: (value: boolean) => void;
   modalState: 'Expense' | 'Income';
-  toggleModal: () => void;
   modalAnimation: any;
 }
 
 export default function Modal({
-  toggleModal,
   modalAnimation,
+  setModalVisibility,
   modalState,
 }: ModalProps) {
   const [text, setText] = useState('');
@@ -30,9 +31,15 @@ export default function Modal({
       style={modalAnimation}
       className='absolute bottom-0 h-full w-full flex-1'
     >
-      <Pressable className='h-[12.5vh] w-full' onPressIn={toggleModal} />
-      <View className='flex-1 justify-center rounded-t-3xl bg-gray-950'>
-        <Text className='text-2xl text-white'>{modalState}</Text>
+      <Pressable
+        className='h-[10vh] max-h-16 w-full'
+        onPressIn={() => setModalVisibility(false)}
+      />
+      <View className='flex-1 justify-start rounded-t-3xl bg-gray-950'>
+        <PageHeader
+          onClick={() => setModalVisibility(false)}
+          title={modalState === 'Income' ? 'Add Income' : 'Add Expense'}
+        />
         <NumericTextBox value={text} />
         <NumericKeyboard onBackSpace={onBackSpace} onKeyPress={onKeyPress} />
       </View>

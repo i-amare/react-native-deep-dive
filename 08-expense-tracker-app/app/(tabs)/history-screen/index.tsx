@@ -17,13 +17,15 @@ export default function HistoryScreen() {
       <Text className='m-4 mb-8 text-3xl font-bold text-white'>
         Transaction History
       </Text>
-      <BlurView
-        className='h-full w-full rounded-3xl pt-8'
-        intensity={80}
-        tint='dark'
-      >
-        <TransactionList data={transactionHistory} />
-      </BlurView>
+      <View className='overflow-hidden rounded-t-3xl'>
+        <BlurView
+          className='h-full w-full rounded-3xl pt-8'
+          intensity={80}
+          tint='dark'
+        >
+          <TransactionList data={transactionHistory} />
+        </BlurView>
+      </View>
     </SafeAreaView>
   );
 }

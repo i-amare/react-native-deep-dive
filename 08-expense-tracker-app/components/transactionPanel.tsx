@@ -21,7 +21,7 @@ export default function TransactionPanel({
       >
         <BlurView className='h-full w-full' intensity={80} tint='dark'>
           <View className='mx-auto my-4 h-1 w-12 rounded-xl bg-white' />
-          <Text className='px-4 text-2xl font-semibold text-white'>
+          <Text className='px-4 mb-4 text-2xl font-semibold text-white'>
             Transactions
           </Text>
           <TransactionList data={transactions} />

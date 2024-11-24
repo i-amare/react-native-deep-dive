@@ -3,11 +3,13 @@ import Modal from '@/components/modal';
 import TransactionPanel from '@/components/transactionPanel';
 import { AccountContext } from '@/context/AccountContext';
 import { useModalAnimation, useScrollAnimation } from '@/hooks/AnimationHooks';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Image, SafeAreaView } from 'react-native';
 
 export default function HomeScreen() {
+  const [modalState, setModalState] = useState<'Expense' | 'Income'>('Expense');
   const { balance, transactionHistory } = useContext(AccountContext);
+
   const { panGesture, fastScroll, slowScroll } = useScrollAnimation();
   const { toggleModal, modalAnimation, setModalVisibility } =
     useModalAnimation();
@@ -20,6 +22,7 @@ export default function HomeScreen() {
         className='absolute left-0 top-0 h-screen w-full'
       />
       <AccountCard
+      setModalState={setModalState}
         slowScroll={slowScroll}
         setModalVisibility={setModalVisibility}
         balance={balance}
@@ -29,7 +32,11 @@ export default function HomeScreen() {
         panGesture={panGesture}
         transactions={transactionHistory}
       />
-      <Modal modalAnimation={modalAnimation} toggleModal={toggleModal} />
+      <Modal
+        modalState={modalState}
+        modalAnimation={modalAnimation}
+        toggleModal={toggleModal}
+      />
     </SafeAreaView>
   );
 }

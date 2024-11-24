@@ -6,6 +6,7 @@ import Animated from 'react-native-reanimated';
 interface AccountCardProps {
   balance: number;
   setModalVisibility: (value: boolean) => void;
+  setModalState: (value: 'Expense' | 'Income') => void;
   slowScroll: any;
 }
 
@@ -13,6 +14,7 @@ export default function AccountCard({
   balance,
   setModalVisibility,
   slowScroll,
+  setModalState,
 }: AccountCardProps) {
   const router = useRouter();
 
@@ -32,13 +34,19 @@ export default function AccountCard({
         <View className='mt-3 flex flex-row'>
           <Button
             text='Top Up'
-            onPress={() => setModalVisibility(true)}
+            onPress={() => {
+              setModalVisibility(true);
+              setModalState('Income');
+            }}
             icon={<AntDesign name='plus' color='white' size={12} />}
           />
           <View className='mr-2'></View>
           <Button
             text='Add Expense'
-            onPress={() => setModalVisibility(true)}
+            onPress={() => {
+              setModalVisibility(true);
+              setModalState('Expense');
+            }}
             icon={<Feather name='arrow-up-right' color='white' size={12} />}
           />
         </View>

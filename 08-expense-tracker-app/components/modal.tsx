@@ -1,7 +1,9 @@
 import NumericKeyboard from '@/components/ui/numericKeyboard';
 import NumericTextBox from '@/components/ui/numericTextBox';
-import { useState } from 'react';
-import { Pressable, View } from 'react-native';
+import { AccountContext } from '@/context/AccountContext';
+import { Transaction } from '@/types/Account';
+import { useContext, useState } from 'react';
+import { Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import PageHeader from './ui/pageHeader';
 
@@ -16,6 +18,21 @@ export default function Modal({
   setModalVisibility,
   modalState,
 }: ModalProps) {
+  const { addTransaction: addTransactionContext } = useContext(AccountContext);
+
+  const addTransaction = () => {
+    const transaction: Transaction = {
+      id: '',
+      name: '',
+      description: '',
+      category: '',
+      amount: modalState === 'Income' ? -parseFloat(text) : parseFloat(text),
+      date: new Date(Date.now()),
+    };
+    setText('');
+    addTransactionContext(transaction);
+  };
+
   const [text, setText] = useState('');
 
   function onKeyPress(value: string) {
@@ -41,7 +58,18 @@ export default function Modal({
           title={modalState === 'Income' ? 'Add Income' : 'Add Expense'}
         />
         <NumericTextBox value={text} />
-        <NumericKeyboard onBackSpace={onBackSpace} onKeyPress={onKeyPress} />
+        <View className='flex w-full items-center'>
+          <Pressable
+            onPressIn={() => {
+              addTransaction();
+              setModalVisibility(false);
+            }}
+            className='mb-4 flex h-12 w-[95%] items-center justify-center rounded-2xl bg-white'
+          >
+            <Text className='text-center text-xl font-semibold'>Continue</Text>
+          </Pressable>
+          <NumericKeyboard onBackSpace={onBackSpace} onKeyPress={onKeyPress} />
+        </View>
       </View>
     </Animated.View>
   );

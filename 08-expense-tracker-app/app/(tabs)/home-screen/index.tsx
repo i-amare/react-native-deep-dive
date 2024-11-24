@@ -16,11 +16,11 @@ export default function HomeScreen() {
   const {
     toggleModal,
     modalAnimation,
-    setModalVisibility: sMV,
+    setModalVisibility: setModalVisibilityAnimation,
   } = useModalAnimation();
 
   const setModalVisibility = (value: boolean) => {
-    sMV(value);
+    setModalVisibilityAnimation(value);
     setIsVisible(!value);
   };
 

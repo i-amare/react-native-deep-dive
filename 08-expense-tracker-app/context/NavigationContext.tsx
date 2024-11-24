@@ -19,7 +19,7 @@ export function NavigationContextProvider({
 }: {
   children?: React.ReactNode;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   return (
     <NavigationContext.Provider value={{ isVisible, setIsVisible }}>

@@ -39,7 +39,7 @@ export function AccountContextProvider({
     setTransactionHistory((prev) =>
       prev.filter((val) => {
         if (val.id === transactionID) {
-          setBalance((prevBalance) => (prevBalance += val.amount));
+          setBalance((prevBalance) => (prevBalance -= val.amount));
           return false;
         }
         return true;

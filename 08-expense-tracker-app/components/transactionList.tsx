@@ -1,4 +1,6 @@
+import { AccountContext } from '@/context/AccountContext';
 import { Transaction } from '@/types/Account';
+import { useContext } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -37,10 +39,13 @@ function TransactionItem({
   category,
   description,
 }: TransactionProps) {
+  const { removeTransaction } = useContext(AccountContext);
+
   const xTranslation = useSharedValue(0);
 
   const MAX_TRANSLATION_LEFT = -200;
   const MAX_TRANSLATION_RIGHT = 0;
+  const CRITICAL_POINT = -100;
 
   const panGesture = Gesture.Pan()
     .onChange(({ translationX }) => {
@@ -53,6 +58,9 @@ function TransactionItem({
       console.log(`Item (${id}) has panned by ${translationX}`);
     })
     .onEnd(() => {
+      if (xTranslation.value < CRITICAL_POINT) {
+        removeTransaction(id);
+      }
       xTranslation.value = withTiming(0, {
         duration: 200,
         easing: Easing.inOut(Easing.quad),

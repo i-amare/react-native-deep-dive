@@ -10,7 +10,7 @@ export default function TransactionList({ data }: TransactionListProps) {
     <FlatList
       className='mx-auto w-11/12 flex-1'
       data={data}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id || Math.random().toString()}
       renderItem={({ item }) => <TransactionItem {...item} />}
       ListFooterComponent={<View className='h-[40vh]' />}
       ItemSeparatorComponent={() => (

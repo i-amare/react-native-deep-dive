@@ -37,10 +37,6 @@ export default function Modal({
 
   const [amount, setAmount] = useState('');
 
-  useEffect(() => {
-    console.log(Number(amount));
-  }, [amount]);
-
   function onKeyPress(value: string) {
     setAmount((prev) => {
       const newAmount = (prev + value).replace(',', '.');

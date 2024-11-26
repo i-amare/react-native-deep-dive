@@ -2,7 +2,8 @@ import NumericKeyboard from '@/components/ui/numericKeyboard';
 import NumericTextBox from '@/components/ui/numericTextBox';
 import { AccountContext } from '@/context/AccountContext';
 import { Transaction } from '@/types/Account';
-import { useContext, useState } from 'react';
+import { formatStringNumber } from '@/utils/utils';
+import { useContext, useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import PageHeader from './ui/pageHeader';
@@ -26,21 +27,36 @@ export default function Modal({
       name: '',
       description: '',
       category: '',
-      amount: modalState === 'Income' ? parseFloat(text) : -parseFloat(text),
+      amount:
+        modalState === 'Income' ? parseFloat(amount) : -parseFloat(amount),
       date: new Date(Date.now()),
     };
-    setText('');
+    setAmount('');
     accountContext.addTransaction(transaction);
   };
 
-  const [text, setText] = useState('');
+  const [amount, setAmount] = useState('');
+
+  useEffect(() => {
+    console.log(Number(amount));
+  }, [amount]);
 
   function onKeyPress(value: string) {
-    setText(text + value);
+    setAmount((prev) => {
+      const newAmount = (prev + value).replace(',', '.');
+      if (Number.isNaN(Number(newAmount))) return prev;
+      if (newAmount.includes('.')) {
+        const [integer, decimal] = newAmount.split('.');
+        if (decimal.length > 2) {
+          return prev;
+        }
+      }
+      return formatStringNumber(newAmount);
+    });
   }
 
   function onBackSpace() {
-    setText(text.slice(0, -1));
+    setAmount(amount.toString().slice(0, -1));
   }
 
   return (
@@ -57,7 +73,7 @@ export default function Modal({
           onClick={() => setModalVisibility(false)}
           title={modalState === 'Income' ? 'Add Income' : 'Add Expense'}
         />
-        <NumericTextBox value={text} />
+        <NumericTextBox value={amount.toString()} />
         <View className='flex w-full items-center'>
           <Pressable
             onPressIn={() => {

@@ -1,5 +1,12 @@
 import { Transaction } from '@/types/Account';
 import { FlatList, Text, View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 type TransactionListProps = {
   data: Transaction[];
@@ -30,26 +37,54 @@ function TransactionItem({
   category,
   description,
 }: TransactionProps) {
+  const xTranslation = useSharedValue(0);
+
+  const MAX_TRANSLATION_LEFT = -200;
+  const MAX_TRANSLATION_RIGHT = 0;
+
+  const panGesture = Gesture.Pan()
+    .onChange(({ translationX }) => {
+      if (
+        translationX > MAX_TRANSLATION_LEFT &&
+        translationX < MAX_TRANSLATION_RIGHT
+      ) {
+        xTranslation.value = translationX;
+      }
+      console.log(`Item (${id}) has panned by ${translationX}`);
+    })
+    .onEnd(() => {
+      xTranslation.value = withTiming(0, {
+        duration: 200,
+        easing: Easing.inOut(Easing.quad),
+      });
+    });
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: xTranslation.value }],
+  }));
+
   return (
-    <View className='w-full py-2'>
-      <Text className='text-sm font-semibold text-gray-200'>
-        {date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
-      </Text>
-      <View className='flex-row items-center justify-between'>
-        <View>
-          <Text className='font-semibold text-white'>{name}</Text>
-          <Text className='-translate-y-1 text-sm text-gray-200'>
-            {category}
+    <GestureDetector gesture={panGesture}>
+      <Animated.View style={animatedStyle} className='w-full py-2'>
+        <Text className='text-sm font-semibold text-gray-200'>
+          {date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}
+        </Text>
+        <View className='flex-row items-center justify-between'>
+          <View>
+            <Text className='font-semibold text-white'>{name}</Text>
+            <Text className='-translate-y-1 text-sm text-gray-200'>
+              {category}
+            </Text>
+          </View>
+          <Text
+            className={`-translate-y-1 font-semibold ${
+              amount > 0 ? 'text-green-400' : 'text-red-400'
+            }`}
+          >
+            {amount > 0 ? `R${amount}` : `-R${Math.abs(amount)}`}
           </Text>
         </View>
-        <Text
-          className={`-translate-y-1 font-semibold ${
-            amount > 0 ? 'text-green-400' : 'text-red-400'
-          }`}
-        >
-          {amount > 0 ? `R${amount}` : `-R${Math.abs(amount)}`}
-        </Text>
-      </View>
-    </View>
+      </Animated.View>
+    </GestureDetector>
   );
 }

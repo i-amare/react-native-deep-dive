@@ -25,7 +25,7 @@ export function AccountContextProvider({
     }
   }, []);
 
-  const [balance, setBalance] = useState(1000);
+  const [balance, setBalance] = useState(10000);
   const [transactionHistory, setTransactionHistory] = useState<Transaction[]>(
     [],
   );

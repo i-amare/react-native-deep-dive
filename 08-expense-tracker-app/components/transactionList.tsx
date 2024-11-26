@@ -66,7 +66,9 @@ function TransactionItem({
                 amount > 0 ? 'text-green-400' : 'text-red-400'
               }`}
             >
-              {amount > 0 ? `R${amount}` : `-R${Math.abs(amount)}`}
+              {amount > 0
+                ? `R${amount.toFixed(2)}`
+                : `-R${Math.abs(amount).toFixed(2)}`}
             </Text>
           </View>
         </Animated.View>

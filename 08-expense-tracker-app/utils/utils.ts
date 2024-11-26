@@ -7,7 +7,7 @@
  * formatStringNumber('01.23') // returns '1,23'
  */
 export const formatStringNumber = (value: string): string => {
-  return value.replace('.', ',').replace(/^0+/, '');
+  return value.replace('.', ',').replace(/^0+(?=\d)/, '');
 };
 
 /**

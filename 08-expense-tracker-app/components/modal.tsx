@@ -2,8 +2,8 @@ import NumericKeyboard from '@/components/ui/numericKeyboard';
 import NumericTextBox from '@/components/ui/numericTextBox';
 import { AccountContext } from '@/context/AccountContext';
 import { Transaction } from '@/types/Account';
-import { formatStringNumber } from '@/utils/utils';
-import { useContext, useEffect, useState } from 'react';
+import { formatStringNumber, parseNumber } from '@/utils/utils';
+import { useContext, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import PageHeader from './ui/pageHeader';
@@ -28,7 +28,7 @@ export default function Modal({
       description: '',
       category: '',
       amount:
-        modalState === 'Income' ? parseFloat(amount) : -parseFloat(amount),
+        modalState === 'Income' ? parseNumber(amount) : -parseNumber(amount),
       date: new Date(Date.now()),
     };
     setAmount('');

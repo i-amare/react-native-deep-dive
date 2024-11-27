@@ -107,7 +107,7 @@ export const useScrollAnimation = () => {
 };
 
 export const useDeleteAnimation = (onDelete: () => void) => {
-  const MAX_TRANSLATION_LEFT = -200;
+  const MAX_TRANSLATION_LEFT = -150;
   const MAX_TRANSLATION_RIGHT = 0;
   const DELETION_THRESHOLD = -100;
   const OPACITY_BUFFER = 20;

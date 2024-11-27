@@ -39,7 +39,7 @@ export const useModalAnimation = (onDismiss?: () => void) => {
   const modalSwipeGesture = Gesture.Pan()
     .onChange(({ translationX, translationY }) => {
       xTranslation.value = translationX;
-      yTranslation.value = translationY;
+      if (translationY >= 0) yTranslation.value = translationY;
     })
     .onEnd(() => {
       if (

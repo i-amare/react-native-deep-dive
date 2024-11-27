@@ -10,11 +10,9 @@ interface PageHeaderProps {
 }
 export default function PageHeader({ title, onClick }: PageHeaderProps) {
   const router = useRouter();
-  const safeArea = useSafeAreaInsets();
 
   return (
     <View
-      style={{ transform: `translateY(${safeArea.top}px)` }}
       className='mt-4 flex w-full items-start justify-center'
     >
       <View className='absolute flex h-full w-full justify-center'>

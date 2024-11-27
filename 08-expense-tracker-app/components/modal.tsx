@@ -1,12 +1,11 @@
+import Transaction from '@/classes/Transaction';
 import NumericKeyboard from '@/components/ui/numericKeyboard';
 import NumericTextBox from '@/components/ui/numericTextBox';
 import { AccountContext } from '@/context/AccountContext';
-import { useModalAnimation } from '@/hooks/AnimationHooks';
-import { Transaction } from '@/types/Account';
 import { formatStringNumber, parseNumber } from '@/utils/utils';
 import { useContext, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 import PageHeader from './ui/pageHeader';
 
@@ -26,17 +25,10 @@ export default function Modal({
   const accountContext = useContext(AccountContext);
 
   const addTransaction = () => {
-    const transaction: Transaction = {
-      id: '',
-      name: '',
-      description: '',
-      category: '',
-      amount:
-        modalState === 'Income' ? parseNumber(amount) : -parseNumber(amount),
-      date: new Date(Date.now()),
-    };
+    const numAmount =
+      modalState === 'Income' ? parseNumber(amount) : -parseNumber(amount);
+    accountContext.addTransaction(new Transaction(numAmount));
     setAmount('');
-    accountContext.addTransaction(transaction);
   };
 
   const [amount, setAmount] = useState('');

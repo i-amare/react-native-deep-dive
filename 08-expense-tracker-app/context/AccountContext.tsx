@@ -1,5 +1,6 @@
 import expenses from '@/assets/data/data';
-import { Account, Transaction } from '@/types/Account';
+import Transaction from '@/classes/Transaction';
+import { Account } from '@/types/Account';
 import { createContext, useEffect, useState } from 'react';
 
 export type AccountContextType = Account & {

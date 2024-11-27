@@ -1,3 +1,4 @@
+import { Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
 import {
   Easing,
@@ -7,29 +8,60 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 
-export const useModalAnimation = () => {
-  const modalScrollContext = useSharedValue(100);
+export const useModalAnimation = (onDismiss?: () => void) => {
+  const SCREEN_HEIGHT = Dimensions.get('window').height;
+
+  const X_DISMISS_THRESHOLD = 100;
+  const Y_DISMISS_THRESHOLD = 75;
+
+  const xTranslation = useSharedValue(0);
+  const yTranslation = useSharedValue(SCREEN_HEIGHT);
+
+  const animationEasing = {
+    duration: 450,
+    easing: Easing.inOut(Easing.ease),
+  };
 
   const toggleModal = () => {
-    modalScrollContext.value = modalScrollContext.value === 0 ? 100 : 0;
+    yTranslation.value = withTiming(
+      (yTranslation.value = 0 ? SCREEN_HEIGHT : 0),
+      animationEasing,
+    );
   };
 
   const setModalVisibility = (isVisible: boolean) => {
-    modalScrollContext.value = isVisible ? 0 : 100;
+    yTranslation.value = withTiming(
+      isVisible ? 0 : SCREEN_HEIGHT,
+      animationEasing,
+    );
   };
+
+  const modalSwipeGesture = Gesture.Pan()
+    .onChange(({ translationX, translationY }) => {
+      xTranslation.value = translationX;
+      yTranslation.value = translationY;
+    })
+    .onEnd(() => {
+      if (
+        xTranslation.value > X_DISMISS_THRESHOLD ||
+        yTranslation.value > Y_DISMISS_THRESHOLD
+      ) {
+        runOnJS(setModalVisibility)(false);
+        if (onDismiss != undefined) runOnJS(onDismiss)();
+      } else {
+        yTranslation.value = withTiming(0);
+      }
+    });
 
   const modalAnimation = useAnimatedStyle(() => ({
     transform: [
       {
-        translateY: withTiming(`${modalScrollContext.value}%`, {
-          duration: 450,
-          easing: Easing.inOut(Easing.ease),
-        }),
+        translateY: yTranslation.value,
       },
     ],
   }));
 
-  return { toggleModal, modalAnimation, setModalVisibility };
+  return { toggleModal, modalAnimation, setModalVisibility, modalSwipeGesture };
 };
 
 export const useScrollAnimation = () => {
@@ -131,6 +163,6 @@ export const useDeleteAnimation = (onDelete: () => void) => {
   return {
     panGesture,
     itemSwipeAnimation,
-    iconOpacityAnimation
-  }
+    iconOpacityAnimation,
+  };
 };

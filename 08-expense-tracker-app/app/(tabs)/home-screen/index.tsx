@@ -16,6 +16,7 @@ export default function HomeScreen() {
   const {
     modalAnimation,
     setModalVisibility: setModalVisibilityWithAnimation,
+    modalSwipeGesture,
   } = useModalAnimation();
 
   const setModalVisibility = (value: boolean) => {
@@ -47,6 +48,7 @@ export default function HomeScreen() {
         />
       </View>
       <Modal
+        modalSwipeGesture={modalSwipeGesture}
         setModalVisibility={setModalVisibility}
         modalState={modalState}
         modalAnimation={modalAnimation}

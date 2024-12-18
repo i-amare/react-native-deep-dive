@@ -1,6 +1,9 @@
-import expenses from '@/assets/data/data';
 import Transaction from '@/classes/Transaction';
 import { Account } from '@/types/Account';
+import {
+  getTransactions,
+  addTransaction as postTransaction,
+} from '@/utils/axios';
 import { createContext, useEffect, useState } from 'react';
 
 export type AccountContextType = Account & {
@@ -20,20 +23,30 @@ export function AccountContextProvider({
 }: {
   children?: React.ReactNode;
 }) {
-  useEffect(() => {
-    for (const expense of expenses) {
-      addTransaction(expense);
-    }
-  }, []);
-
   const [balance, setBalance] = useState(10000);
   const [transactionHistory, setTransactionHistory] = useState<Transaction[]>(
     [],
   );
 
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const fetchTransactions = async () => {
+    const response = await getTransactions();
+    console.log(response);
+    Object.keys(response).forEach((key) => {
+      const val = response[key];
+      const transaction = new Transaction(val.amount, new Date(val.date), key);
+      setTransactionHistory((prev) => [transaction, ...prev]);
+      setBalance((prevBalance) => (prevBalance += transaction.amount));
+    });
+  };
+
   function addTransaction(transaction: Transaction) {
     setTransactionHistory((prev) => [transaction, ...prev]);
     setBalance((prevBalance) => (prevBalance += transaction.amount));
+    postTransaction(transaction);
   }
 
   function removeTransaction(transactionID: string) {

@@ -29,19 +29,17 @@ export function AccountContextProvider({
   );
 
   useEffect(() => {
-    fetchTransactions();
-  }, []);
-
-  const fetchTransactions = async () => {
-    const response = await getTransactions();
-    console.log(response);
-    Object.keys(response).forEach((key) => {
-      const val = response[key];
-      const transaction = new Transaction(val.amount, new Date(val.date), key);
-      setTransactionHistory((prev) => [transaction, ...prev]);
-      setBalance((prevBalance) => (prevBalance += transaction.amount));
-    });
-  };
+    (async () => {
+      const response = await getTransactions();
+      if (transactionHistory.length > 0) return;
+      Object.keys(response).forEach((key) => {
+        const val = response[key];
+        const transaction = new Transaction(val.amount, new Date(val.date), key);
+        setTransactionHistory((prev) => [transaction, ...prev]);
+        setBalance((prevBalance) => prevBalance + transaction.amount);
+      });
+    })();
+  }, []); 
 
   function addTransaction(transaction: Transaction) {
     setTransactionHistory((prev) => [transaction, ...prev]);

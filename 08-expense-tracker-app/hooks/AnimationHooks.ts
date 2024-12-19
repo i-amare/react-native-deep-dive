@@ -118,6 +118,8 @@ export const useDeleteAnimation = (onDelete: () => void) => {
   const iconOpacity = useSharedValue(0);
 
   const panGesture = Gesture.Pan()
+    .activeOffsetX([-5, 5]) // Only activate after 15px horizontal movement
+    .failOffsetY([-10, 10])   // Fail if vertical movement exceeds 15px
     .onChange(({ translationX }) => {
       if (
         translationX > MAX_TRANSLATION_LEFT &&

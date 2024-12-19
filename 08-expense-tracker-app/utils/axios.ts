@@ -10,8 +10,12 @@ export const addTransaction = (transaction: Transaction) => {
 };
 
 export const getTransactions = async () => {
-	const response = await axios.get(TRANSACTIONS_ENDPOINT);
-	return response.data;
+  const response = await axios.get(TRANSACTIONS_ENDPOINT);
+  return response.data;
 };
 
 export const setTransactions = () => {};
+
+export const deleteTransaction = (transactionID: string) => {
+  axios.delete(`${DATABASE_URL}/transactions/${transactionID}.json`);
+};

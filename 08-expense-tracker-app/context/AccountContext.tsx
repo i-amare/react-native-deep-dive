@@ -1,6 +1,7 @@
 import Transaction from '@/classes/Transaction';
 import { Account } from '@/types/Account';
 import {
+  deleteTransaction,
   getTransactions,
   addTransaction as postTransaction,
 } from '@/utils/axios';
@@ -59,6 +60,7 @@ export function AccountContextProvider({
         return true;
       }),
     );
+    deleteTransaction(transactionID);
   }
 
   return (

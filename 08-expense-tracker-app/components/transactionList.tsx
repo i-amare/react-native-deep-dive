@@ -1,6 +1,6 @@
+import Transaction from '@/classes/Transaction';
 import { AccountContext } from '@/context/AccountContext';
 import { useDeleteAnimation } from '@/hooks/AnimationHooks';
-import { Transaction } from '@/types/Account';
 import { FontAwesome } from '@expo/vector-icons';
 import { useContext } from 'react';
 import { FlatList, Text, View } from 'react-native';
@@ -43,7 +43,7 @@ function TransactionItem({
 
   return (
     <GestureDetector gesture={panGesture}>
-      <>
+      <View>
         <Animated.View
           style={itemSwipeAnimation}
           className='relative w-full py-2'
@@ -80,7 +80,7 @@ function TransactionItem({
             <FontAwesome size={20} color={'white'} name='trash-o' />
           </View>
         </Animated.View>
-      </>
+      </View>
     </GestureDetector>
   );
 }

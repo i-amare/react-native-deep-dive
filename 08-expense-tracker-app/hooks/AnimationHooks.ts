@@ -24,7 +24,7 @@ export const useModalAnimation = (onDismiss?: () => void) => {
 
   const toggleModal = () => {
     yTranslation.value = withTiming(
-      (yTranslation.value = 0 ? SCREEN_HEIGHT : 0),
+      yTranslation.value === 0 ? SCREEN_HEIGHT : 0,
       animationEasing,
     );
   };
@@ -47,7 +47,7 @@ export const useModalAnimation = (onDismiss?: () => void) => {
         yTranslation.value > Y_DISMISS_THRESHOLD
       ) {
         runOnJS(setModalVisibility)(false);
-        if (onDismiss != undefined) runOnJS(onDismiss)();
+        if (onDismiss) runOnJS(onDismiss)();
       } else {
         yTranslation.value = withTiming(0);
       }

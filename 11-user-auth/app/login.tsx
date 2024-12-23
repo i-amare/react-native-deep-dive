@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { AuthContext } from "@/contexts/authContext";
+import { useContext, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
 export default function LoginScreen() {
+	const { authenticate } = useContext(AuthContext);
+
 	const [email, setEmail] = useState("");
 
-	const onLoginButtonPress = () => {};
+	const onLoginButtonPress = () => {
+		authenticate();
+	};
 	const onCreateAccountButtonPress = () => {};
 
 	return (

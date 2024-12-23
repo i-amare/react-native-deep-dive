@@ -6,7 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import { useContext, useEffect } from "react";
 import "react-native-reanimated";
 
-import { AuthContext } from "@/contexts/authContext";
+import { AuthContext, AuthContextProvider } from "@/contexts/authContext";
 import "@/global.css";
 import LoginScreen from "./login";
 
@@ -32,16 +32,18 @@ export default function RootLayout() {
 	}
 
 	return (
-		<ThemeProvider value={DarkTheme}>
-			{isAuthenticated ? (
-				<Stack>
-					<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-					<Stack.Screen name='+not-found' />
-				</Stack>
-			) : (
-				<LoginScreen />
-			)}
-			<StatusBar style='auto' />
-		</ThemeProvider>
+		<AuthContextProvider>
+			<ThemeProvider value={DarkTheme}>
+				{isAuthenticated ? (
+					<Stack>
+						<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+						<Stack.Screen name='+not-found' />
+					</Stack>
+				) : (
+					<LoginScreen />
+				)}
+				<StatusBar style='auto' />
+			</ThemeProvider>
+		</AuthContextProvider>
 	);
 }

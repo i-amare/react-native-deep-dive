@@ -18,6 +18,7 @@ export default function RootLayout() {
 
 	const [loaded] = useFonts({
 		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+		Hurmit: require("@/assets/fonts/HurmitNerdFont-Regular.otf"),
 	});
 
 	useEffect(() => {

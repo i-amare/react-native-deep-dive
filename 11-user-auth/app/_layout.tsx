@@ -1,21 +1,18 @@
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import "react-native-reanimated";
 
-import { AuthContext, AuthContextProvider } from "@/contexts/authContext";
+import { AuthContextProvider } from "@/contexts/AuthContext";
 import "@/global.css";
-import LoginScreen from "./login";
+import { Slot } from "expo-router";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-	const { isAuthenticated } = useContext(AuthContext);
-
 	const [loaded] = useFonts({
 		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
 		Hurmit: require("@/assets/fonts/HurmitNerdFont-Regular.otf"),
@@ -34,14 +31,7 @@ export default function RootLayout() {
 	return (
 		<AuthContextProvider>
 			<ThemeProvider value={DarkTheme}>
-				{isAuthenticated ? (
-					<Stack>
-						<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-						<Stack.Screen name='+not-found' />
-					</Stack>
-				) : (
-					<LoginScreen />
-				)}
+				<Slot />
 				<StatusBar style='auto' />
 			</ThemeProvider>
 		</AuthContextProvider>

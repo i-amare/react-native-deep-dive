@@ -1,9 +1,13 @@
-import { AuthContext } from "@/contexts/authContext";
+import { AuthContext } from "@/contexts/AuthContext";
+import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
 export default function LoginScreen() {
-	const { authenticate } = useContext(AuthContext);
+	const { authenticate, isAuthenticated } = useContext(AuthContext);
+	const router = useRouter();
+
+	if (isAuthenticated === true) router.navigate("/(home)");
 
 	const [email, setEmail] = useState("");
 
@@ -14,13 +18,13 @@ export default function LoginScreen() {
 
 	return (
 		<View className='flex-1 bg-black justify-between p-12'>
-			<Text className='text-center font-hurmit text-red-200 text-4xl'>
+			<Text className='text-center font-hurmit text-white text-4xl'>
 				CodeBerry
 			</Text>
 			<View>
 				<View className='mb-6'>
-					<Text className='text-2xl font-space text-white mb-2'>Sign In</Text>
-					<Text className='text-gray-600 text-lg mb-4'>
+					<Text className='text-2xl font-space text-white'>Sign In</Text>
+					<Text className='text-gray-600 text-lg'>
 						Please enter email address below
 					</Text>
 				</View>

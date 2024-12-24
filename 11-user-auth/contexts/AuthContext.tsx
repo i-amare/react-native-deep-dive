@@ -19,7 +19,7 @@ export function AuthContextProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const [isAuthenticated, setIsAuthenticated] = useState(true);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	useEffect(() => {
 		console.log(`Auth State has changed to: ${isAuthenticated}`);

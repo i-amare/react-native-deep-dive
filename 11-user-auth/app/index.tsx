@@ -1,5 +1,5 @@
 import { AuthContext } from "@/contexts/AuthContext";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { useContext, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
@@ -46,12 +46,12 @@ export default function LoginScreen() {
 					</Pressable>
 				</View>
 			</View>
-			<Pressable
-				onPressIn={onCreateAccountButtonPress}
-				className='w-full h-14 rounded-lg mt-4 justify-center items-center'
+			<Link
+				href='/signup'
+				className='w-full h-14 rounded-lg flex justify-center items-center'
 			>
 				<Text className='text-gray-600 text-lg'>No account? Create one!</Text>
-			</Pressable>
+			</Link>
 		</View>
 	);
 }

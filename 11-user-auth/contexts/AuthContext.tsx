@@ -1,43 +1,43 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react';
 
 export interface AuthType {
-	isAuthenticated: boolean;
-	setIsAuthenticated: (val: boolean) => void;
-	authenticate: () => void;
+  isAuthenticated: boolean;
+  setIsAuthenticated: (val: boolean) => void;
+  authenticate: () => void;
 }
 
 export const defaultAuthContext: AuthType = {
-	isAuthenticated: false,
-	setIsAuthenticated: () => {},
-	authenticate: () => {},
+  isAuthenticated: false,
+  setIsAuthenticated: () => {},
+  authenticate: () => {},
 };
 
 export const AuthContext = createContext(defaultAuthContext);
 
 export function AuthContextProvider({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-	useEffect(() => {
-		console.log(`Auth State has changed to: ${isAuthenticated}`);
-	}, [isAuthenticated]);
+  useEffect(() => {
+    console.log(`Auth State has changed to: ${isAuthenticated}`);
+  }, [isAuthenticated]);
 
-	const authenticate = () => {
-		setIsAuthenticated(true);
-	};
+  const authenticate = () => {
+    setIsAuthenticated(true);
+  };
 
-	return (
-		<AuthContext.Provider
-			value={{
-				isAuthenticated: isAuthenticated,
-				setIsAuthenticated,
-				authenticate,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+  return (
+    <AuthContext.Provider
+      value={{
+        isAuthenticated: isAuthenticated,
+        setIsAuthenticated,
+        authenticate,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }

@@ -1,7 +1,7 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { Link, useRouter } from "expo-router";
 import { useContext, useEffect, useState } from "react";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 
 export default function LoginScreen() {
 	const { authenticate, isAuthenticated } = useContext(AuthContext);
@@ -18,7 +18,7 @@ export default function LoginScreen() {
 	};
 
 	return (
-		<View className='flex-1 bg-black justify-between p-12'>
+		<SafeAreaView className='flex-1 bg-black justify-between p-12'>
 			<Text className='text-center font-hurmit text-white text-4xl'>
 				CodeBerry
 			</Text>
@@ -51,8 +51,10 @@ export default function LoginScreen() {
 				href='/signup'
 				className='w-full h-14 rounded-lg flex justify-center items-center'
 			>
-				<Text className='text-gray-600 text-center text-lg'>No account? Create one!</Text>
+				<Text className='text-gray-600 text-center text-lg'>
+					No account? Create one!
+				</Text>
 			</Link>
-		</View>
+		</SafeAreaView>
 	);
 }

@@ -3,11 +3,34 @@ import { Link, useRouter } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 
+interface FormInput {
+	title: string;
+	placeholder: string;
+	value: string;
+	onChangeText: (text: string) => void;
+}
+
+function FormInput({ title, placeholder, value, onChangeText }: FormInput) {
+	return (
+		<View>
+			<Text className='text-lg font-hurmit text-gray-300 mb-1'>{title}</Text>
+			<TextInput
+				className='bg-white h-14 mb-4 text-lg text-black font-hurmit rounded-lg p-2'
+				placeholder={placeholder}
+				placeholderTextColor='#aaa'
+				onChangeText={onChangeText}
+				value={value}
+			/>
+		</View>
+	);
+}
+
 export default function LoginScreen() {
 	const { authenticate, isAuthenticated } = useContext(AuthContext);
 	const router = useRouter();
 
 	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	useEffect(() => {
 		if (isAuthenticated) router.navigate("/(home)");
@@ -30,12 +53,17 @@ export default function LoginScreen() {
 					</Text>
 				</View>
 				<View>
-					<TextInput
-						className='bg-white h-14 text-lg text-black font-hurmit rounded-lg p-2'
+					<FormInput
 						placeholder='Please enter your e-mail'
-						placeholderTextColor='#aaa'
-						onChangeText={(text) => setEmail(text)}
+						onChangeText={setEmail}
+						title='E-mail'
 						value={email}
+					/>
+					<FormInput
+						placeholder='Password'
+						onChangeText={setPassword}
+						title='Password'
+						value={password}
 					/>
 					<Pressable
 						onPressIn={onLoginButtonPress}

@@ -1,20 +1,21 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { Link, useRouter } from "expo-router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
 export default function LoginScreen() {
 	const { authenticate, isAuthenticated } = useContext(AuthContext);
 	const router = useRouter();
 
-	if (isAuthenticated === true) router.navigate("/(home)");
-
 	const [email, setEmail] = useState("");
+
+	useEffect(() => {
+		if (isAuthenticated) router.navigate("/(home)");
+	}, [isAuthenticated]);
 
 	const onLoginButtonPress = () => {
 		authenticate();
 	};
-	const onCreateAccountButtonPress = () => {};
 
 	return (
 		<View className='flex-1 bg-black justify-between p-12'>
@@ -50,7 +51,7 @@ export default function LoginScreen() {
 				href='/signup'
 				className='w-full h-14 rounded-lg flex justify-center items-center'
 			>
-				<Text className='text-gray-600 text-lg'>No account? Create one!</Text>
+				<Text className='text-gray-600 text-center text-lg'>No account? Create one!</Text>
 			</Link>
 		</View>
 	);

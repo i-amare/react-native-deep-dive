@@ -1,29 +1,8 @@
+import FormInput from '@/components/ui/FormInput';
 import { AuthContext } from '@/contexts/AuthContext';
 import { Link, useRouter } from 'expo-router';
 import { useContext, useEffect, useState } from 'react';
-import { Pressable, SafeAreaView, Text, TextInput, View } from 'react-native';
-
-interface FormInput {
-  title: string;
-  placeholder: string;
-  value: string;
-  onChangeText: (text: string) => void;
-}
-
-function FormInput({ title, placeholder, value, onChangeText }: FormInput) {
-  return (
-    <View>
-      <Text className='mb-1 font-hurmit text-lg text-gray-300'>{title}</Text>
-      <TextInput
-        className='mb-4 h-14 rounded-lg bg-white p-2 font-hurmit text-lg text-black'
-        placeholder={placeholder}
-        placeholderTextColor='#aaa'
-        onChangeText={onChangeText}
-        value={value}
-      />
-    </View>
-  );
-}
+import { Pressable, SafeAreaView, Text, View } from 'react-native';
 
 export default function LoginScreen() {
   const { authenticate, isAuthenticated } = useContext(AuthContext);
@@ -41,8 +20,8 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className='m-12 flex-1 justify-between bg-black'>
-      <Text className='text-center font-hurmit text-4xl text-white'>
+    <SafeAreaView className='p-12 flex-1 justify-between bg-black'>
+      <Text className='h-[20vh] text-center font-hurmit text-4xl text-white'>
         CodeBerry
       </Text>
       <View>
@@ -75,14 +54,16 @@ export default function LoginScreen() {
           </Pressable>
         </View>
       </View>
-      <Link
-        href='/signup'
-        className='flex h-14 w-full items-center justify-center rounded-lg'
-      >
-        <Text className='text-center text-lg text-gray-600'>
-          No account? Create one!
-        </Text>
-      </Link>
+      <View className='flex h-[20vh] w-full justify-end'>
+        <Link
+          href='/signup'
+          className='flex h-14 w-full items-center justify-center rounded-lg'
+        >
+          <Text className='text-center text-lg text-gray-600'>
+            No account? Create one!
+          </Text>
+        </Link>
+      </View>
     </SafeAreaView>
   );
 }

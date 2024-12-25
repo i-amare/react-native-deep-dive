@@ -21,7 +21,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView className='flex-1'>
-      <View className='w-full flex-1 justify-between bg-black p-12'>
+      <View className='flex-1 justify-between bg-black p-12'>
         <Text className='h-[20vh] text-center font-hurmit text-4xl text-white'>
           CodeBerry
         </Text>

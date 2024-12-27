@@ -1,9 +1,14 @@
 import FormInput from '@/components/ui/FormInput';
+import { useButtonAnimation } from '@/hooks/AnimationHooks';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, SafeAreaView, Text, View } from 'react-native';
+import { GestureDetector } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 
 export default function SignUpScreen() {
+  const { tapGesture, scaleOnClick } = useButtonAnimation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -44,14 +49,21 @@ export default function SignUpScreen() {
               title='Confirm Password'
               value={passwordConfirmation}
             />
-            <Pressable
-              onPressIn={onCreateButtonPress}
-              className='mt-4 h-14 w-full items-center justify-center rounded-lg bg-gray-900'
-            >
-              <Text className='text-center font-hurmit text-xl text-white'>
-                Continue
-              </Text>
-            </Pressable>
+            <GestureDetector gesture={tapGesture}>
+              <Animated.View
+                style={scaleOnClick}
+                className='mt-4 h-14 w-full items-center justify-center rounded-lg bg-gray-900'
+              >
+                <Pressable
+                  onPressIn={onCreateButtonPress}
+                  className='flex h-full w-full items-center justify-center'
+                >
+                  <Text className='text-center font-hurmit text-xl text-white'>
+                    Login
+                  </Text>
+                </Pressable>
+              </Animated.View>
+            </GestureDetector>
           </View>
         </View>
         <View className='flex h-[20vh] w-full justify-center'>

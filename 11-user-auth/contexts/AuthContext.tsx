@@ -42,6 +42,8 @@ export function AuthContextProvider({
     if (response.status === 200) {
       setIsAuthenticated(true);
       console.log('User logged in successfully');
+    } else {
+      console.log(response.data.error.message);
     }
   };
 
@@ -63,6 +65,8 @@ export function AuthContextProvider({
     if (response.status === 200) {
       setIsAuthenticated(true);
       console.log('User created successfully');
+    } else {
+      console.log(response.data.error.message);
     }
   };
 

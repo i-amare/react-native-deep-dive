@@ -1,31 +1,31 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
-const FIREBASE_API_KEY = 'AIzaSyA8V66KiW8rqN1_Mlax-CRTHJHX75346AU';
-const SIGN_IN_ENDPOINT = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
-const NEW_USER_ENDPOINT = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`;
+const FIREBASE_CONFIG = {
+	API_KEY: 'AIzaSyA8V66KiW8rqN1_Mlax-CRTHJHX75346AU',
+	BASE_URL: 'https://identitytoolkit.googleapis.com/v1/accounts',
+} as const;
 
-export const createUser = async (email: string, password: string) => {
-  const data = {
-    email: email,
-    password: password,
-    returnSecureToken: true,
-  };
+interface AuthRequestData {
+	email: string;
+	password: string;
+	returnSecureToken: boolean;
+}
 
-  const response = await axios.post(NEW_USER_ENDPOINT, data);
-  console.log(response);
+async function authenticateUser(endpoint: string, credentials: Omit<AuthRequestData, 'returnSecureToken'>): Promise<AxiosResponse> {
+	const data: AuthRequestData = {
+		...credentials,
+		returnSecureToken: true,
+	};
 
-  return response;
-};
+	try {
+		return await axios.post(`${FIREBASE_CONFIG.BASE_URL}:${endpoint}?key=${FIREBASE_CONFIG.API_KEY}`, data);
+	} catch (error) {
+		return (error as any).response;
+	}
+}
 
-export const signIn = async (email: string, password: string) => {
-  const data = {
-    email: email,
-    password: password,
-    returnSecureToken: true,
-  };
+export const createUser = (email: string, password: string) => 
+	authenticateUser('signUp', { email, password });
 
-  const response = await axios.post(SIGN_IN_ENDPOINT, data);
-  console.log(response);
-
-  return response;
-};
+export const signIn = (email: string, password: string) => 
+	authenticateUser('signInWithPassword', { email, password });

@@ -1,19 +1,24 @@
 import FormInput from '@/components/ui/FormInput';
+import { AuthContext } from '@/contexts/AuthContext';
 import { useButtonAnimation } from '@/hooks/AnimationHooks';
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Pressable, SafeAreaView, Text, View } from 'react-native';
 import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 export default function SignUpScreen() {
+  const { createNewUser, authenticate } = useContext(AuthContext);
+
   const { tapGesture, scaleOnClick } = useButtonAnimation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const onCreateButtonPress = () => {};
+  const onCreateButtonPress = async () => {
+    createNewUser(email, password, passwordConfirmation);
+  };
 
   return (
     <SafeAreaView className='flex-1'>
@@ -59,7 +64,7 @@ export default function SignUpScreen() {
                   className='flex h-full w-full items-center justify-center'
                 >
                   <Text className='text-center font-hurmit text-xl text-white'>
-                    Login
+                    Create Account
                   </Text>
                 </Pressable>
               </Animated.View>

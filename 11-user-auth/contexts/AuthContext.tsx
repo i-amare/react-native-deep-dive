@@ -1,8 +1,9 @@
-import { createUser } from '@/util/auth';
+import { createUser, signIn } from '@/util/auth';
 import { createContext, useEffect, useState } from 'react';
 
 export interface AuthType {
   isAuthenticated: boolean;
+  signInUser: (email: string, password: string) => void;
   createNewUser: (
     email: string,
     password: string,
@@ -13,6 +14,7 @@ export interface AuthType {
 
 export const defaultAuthContext: AuthType = {
   isAuthenticated: false,
+  signInUser: () => {},
   createNewUser: () => {},
   authenticate: () => {},
 };
@@ -32,6 +34,15 @@ export function AuthContextProvider({
 
   const authenticate = () => {
     setIsAuthenticated(true);
+  };
+
+  const signInUser = async (email: string, password: string) => {
+    const response = await signIn(email, password);
+
+    if (response.status === 200) {
+      setIsAuthenticated(true);
+      console.log('User logged in successfully');
+    }
   };
 
   const createNewUser = async (
@@ -59,6 +70,7 @@ export function AuthContextProvider({
     <AuthContext.Provider
       value={{
         isAuthenticated: isAuthenticated,
+        signInUser: signInUser,
         createNewUser,
         authenticate,
       }}

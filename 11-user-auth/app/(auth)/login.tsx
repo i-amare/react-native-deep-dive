@@ -8,7 +8,7 @@ import { GestureDetector } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 export default function LoginScreen() {
-  const { authenticate, isAuthenticated } = useContext(AuthContext);
+  const { authenticate, isAuthenticated, signInUser } = useContext(AuthContext);
   const router = useRouter();
 
   const { tapGesture, scaleOnClick } = useButtonAnimation();
@@ -21,7 +21,7 @@ export default function LoginScreen() {
   }, [isAuthenticated]);
 
   const onLoginButtonPress = () => {
-    authenticate();
+    signInUser(email, password);
   };
 
   return (

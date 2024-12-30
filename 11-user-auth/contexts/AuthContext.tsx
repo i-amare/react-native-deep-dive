@@ -27,10 +27,16 @@ export function AuthContextProvider({
   children: React.ReactNode;
 }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState('');
 
   useEffect(() => {
     console.log(`Auth State has changed to: ${isAuthenticated}`);
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    console.log(`Auth Token has changed to: ${authToken}`);
+    // setIsAuthenticated(authToken ? true : false);
+  }, [authToken]);
 
   const authenticate = () => {
     setIsAuthenticated(true);
@@ -41,9 +47,10 @@ export function AuthContextProvider({
 
     if (response.status === 200) {
       setIsAuthenticated(true);
+      setAuthToken(response.data.idToken);
       console.log('User logged in successfully');
     } else {
-      console.log(response.data.error.message);
+      alert(response.data.error.message);
     }
   };
 
@@ -66,14 +73,14 @@ export function AuthContextProvider({
       setIsAuthenticated(true);
       console.log('User created successfully');
     } else {
-      console.log(response.data.error.message);
+      alert(response.data.error.message);
     }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: isAuthenticated,
+        isAuthenticated,
         signInUser: signInUser,
         createNewUser,
         authenticate,

@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { FIREBASE_API_KEY } from '@env';
 
 const FIREBASE_CONFIG = {
-  API_KEY: FIREBASE_API_KEY,
+  API_KEY: 'AIzaSyA8V66KiW8rqN1_Mlax-CRTHJHX75346AU',
   BASE_URL: 'https://identitytoolkit.googleapis.com/v1/accounts',
 } as const;
 

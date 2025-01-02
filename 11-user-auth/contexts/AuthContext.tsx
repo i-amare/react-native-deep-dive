@@ -9,6 +9,7 @@ export interface AuthType {
     password: string,
     passwordConfirmation: string,
   ) => void;
+  logoutUser: () => void;
   authenticate: () => void;
 }
 
@@ -16,6 +17,7 @@ export const defaultAuthContext: AuthType = {
   isAuthenticated: false,
   signInUser: () => {},
   createNewUser: () => {},
+  logoutUser: () => {},
   authenticate: () => {},
 };
 
@@ -77,12 +79,19 @@ export function AuthContextProvider({
     }
   };
 
+  const logoutUser = () => {
+    setIsAuthenticated(false);
+    setAuthToken('');
+    console.log('User logged out successfully');
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         signInUser: signInUser,
         createNewUser,
+        logoutUser,
         authenticate,
       }}
     >

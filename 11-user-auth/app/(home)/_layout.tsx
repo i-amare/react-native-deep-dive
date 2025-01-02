@@ -1,10 +1,5 @@
-import {
-  Tabs,
-  usePathname,
-  useRootNavigationState,
-  useRouter,
-} from 'expo-router';
-import React, { useContext, useEffect } from 'react';
+import { Tabs, useRootNavigationState, useRouter } from 'expo-router';
+import React, { useContext, useLayoutEffect } from 'react';
 import { Platform, useColorScheme } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
@@ -19,12 +14,11 @@ export default function TabLayout() {
   const { isAuthenticated } = useContext(AuthContext);
   const router = useRouter();
   const rootNavigation = useRootNavigationState();
-  const pathName = usePathname();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isAuthenticated && rootNavigation?.key)
       router.navigate('/(auth)/login');
-  }, [isAuthenticated, rootNavigation, pathName]);
+  }, [isAuthenticated, rootNavigation]);
 
   return (
     <Tabs

@@ -98,7 +98,7 @@ export function AuthContextProvider({
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        signInUser: signInUser,
+        signInUser,
         createNewUser,
         logoutUser,
         authenticate,

@@ -1,21 +1,13 @@
 import { AuthContext } from '@/contexts/AuthContext';
-import { useRootNavigationState, useRouter } from 'expo-router';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
 export default function HomeScreen() {
-  const { isAuthenticated, logoutUser } = useContext(AuthContext);
-  const router = useRouter();
-  const rootNavigation = useRootNavigationState();
+  const { logoutUser } = useContext(AuthContext);
 
   const onLogoutButtonPress = () => {
     logoutUser();
   };
-
-  useEffect(() => {
-    if (!isAuthenticated && rootNavigation?.key)
-      router.navigate('/(auth)/login');
-  }, [isAuthenticated, rootNavigation]);
 
   return (
     <View className='flex-1 items-center justify-center bg-black'>

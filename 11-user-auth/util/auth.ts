@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, { AxiosResponse } from 'axios';
 
 const FIREBASE_CONFIG = {
@@ -35,3 +36,20 @@ export const createUser = (email: string, password: string) =>
 
 export const signIn = (email: string, password: string) =>
   authenticateUser('signInWithPassword', { email, password });
+
+export const storeAuthToken = async (token: string) => {
+  try {
+    await AsyncStorage.setItem('authToken', token);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const loadAuthToken = async () => {
+  try {
+    return await AsyncStorage.getItem('authToken');
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};

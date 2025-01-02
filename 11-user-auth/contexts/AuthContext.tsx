@@ -1,4 +1,4 @@
-import { createUser, signIn } from '@/util/auth';
+import { createUser, loadAuthToken, signIn, storeAuthToken } from '@/util/auth';
 import { createContext, useEffect, useState } from 'react';
 
 export interface AuthType {
@@ -32,12 +32,21 @@ export function AuthContextProvider({
   const [authToken, setAuthToken] = useState('');
 
   useEffect(() => {
+    loadAuthToken().then((token) => {
+      if (token) {
+        setAuthToken(token);
+        setIsAuthenticated(true);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     console.log(`Auth State has changed to: ${isAuthenticated}`);
   }, [isAuthenticated]);
 
   useEffect(() => {
     console.log(`Auth Token has changed to: ${authToken}`);
-    // setIsAuthenticated(authToken ? true : false);
+    storeAuthToken(authToken);
   }, [authToken]);
 
   const authenticate = () => {

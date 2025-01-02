@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 import { AuthContextProvider } from '@/contexts/AuthContext';
 import '@/global.css';
 import { Slot } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -29,11 +30,13 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthContextProvider>
-      <ThemeProvider value={DarkTheme}>
-        <Slot />
-        <StatusBar style='auto' />
-      </ThemeProvider>
-    </AuthContextProvider>
+    <GestureHandlerRootView>
+      <AuthContextProvider>
+        <ThemeProvider value={DarkTheme}>
+          <Slot />
+          <StatusBar style='auto' />
+        </ThemeProvider>
+      </AuthContextProvider>
+    </GestureHandlerRootView>
   );
 }

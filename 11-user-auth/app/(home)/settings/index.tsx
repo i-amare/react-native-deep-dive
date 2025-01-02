@@ -1,9 +1,25 @@
-import { Text, View } from 'react-native';
+import { AuthContext } from '@/contexts/AuthContext';
+import { useContext } from 'react';
+import { Pressable, Text, View } from 'react-native';
 
 export default function Settings() {
+  const { logoutUser } = useContext(AuthContext);
+
+  const onLogoutButtonPress = () => {
+    logoutUser();
+  };
+
   return (
-    <View className='flex-1 items-center justify-center'>
-      <Text className='text-3xl text-white'>Settings</Text>
+    <View className='flex-1 items-center justify-center p-12'>
+      <Text className='text-3xl text-white'>Settings Screen</Text>
+      <Pressable
+        onPressIn={onLogoutButtonPress}
+        className='mt-4 h-14 w-full items-center justify-center rounded-lg bg-gray-900'
+      >
+        <Text className='text-center font-hurmit text-xl text-white'>
+          Logout
+        </Text>
+      </Pressable>
     </View>
   );
 }

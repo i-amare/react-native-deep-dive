@@ -1,3 +1,4 @@
+import { PlacesContextProvider } from "@/contexts/PlacesContext";
 import "../global.css";
 
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
@@ -28,11 +29,13 @@ export default function RootLayout() {
 
 	return (
 		<ThemeProvider value={DarkTheme}>
-			<Stack>
-				<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-				<Stack.Screen name='places/[placeID]' />
-				<Stack.Screen name='+not-found' />
-			</Stack>
+			<PlacesContextProvider>
+				<Stack>
+					<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+					<Stack.Screen name='places/[placeID]' />
+					<Stack.Screen name='+not-found' />
+				</Stack>
+			</PlacesContextProvider>
 			<StatusBar style='auto' />
 		</ThemeProvider>
 	);

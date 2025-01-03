@@ -1,4 +1,4 @@
-import { Fontisto, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 import { Platform } from "react-native";
@@ -20,18 +20,9 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name='index'
 				options={{
-					title: "All Places",
+					title: "Home",
 					tabBarIcon: ({ color }) => (
-						<Fontisto size={28} name='world-o' color={color} />
-					),
-				}}
-			/>
-			<Tabs.Screen
-				name='addPlace'
-				options={{
-					title: "Add Place",
-					tabBarIcon: ({ color }) => (
-						<MaterialIcons size={28} name='add-location' color={color} />
+						<MaterialIcons size={28} name='house' color={color} />
 					),
 				}}
 			/>

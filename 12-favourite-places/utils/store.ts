@@ -8,7 +8,7 @@ const storeData = async ({ key, value }: { key: string; value: any }) => {
 	}
 };
 
-const readDate = async (key: string) => {
+const readData = async (key: string) => {
 	try {
 		return await AsyncStorage.getItem(key);
 	} catch (e) {

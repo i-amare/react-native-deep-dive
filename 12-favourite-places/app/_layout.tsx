@@ -30,7 +30,6 @@ export default function RootLayout() {
 		<ThemeProvider value={DarkTheme}>
 			<Stack>
 				<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-				<Stack.Screen name='places/[placeID]' />
 				<Stack.Screen name='+not-found' />
 			</Stack>
 			<StatusBar style='auto' />

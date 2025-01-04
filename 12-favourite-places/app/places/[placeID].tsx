@@ -5,7 +5,8 @@ import { Image, Text, View } from "react-native";
 
 export default function Place() {
   const { places } = useContext(PlacesContext);
-  const placeID = useLocalSearchParams();
+  const placeID = useLocalSearchParams().placeID as string;
+  const place = places.find((place) => place.placeID === placeID);
 
   return (
     <View className='my-2 aspect-square w-full rounded-lg bg-gray-900'>
@@ -17,8 +18,7 @@ export default function Place() {
       />
       <View className='px-4 py-2'>
         <Text className='text-xl text-white'>{JSON.stringify(placeID)}</Text>
-        {/* <Text className='text-xl text-white'>{place.title}</Text>
-        <Text className='text-lg text-white'>{place.address}</Text> */}
+        <Text className='text-xl text-white'>{place?.title}</Text>
       </View>
     </View>
   );

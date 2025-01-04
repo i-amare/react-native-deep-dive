@@ -10,7 +10,7 @@ export const storeData = async ({
 	value: any;
 }) => {
 	try {
-		await AsyncStorage.setItem(key, value);
+		await AsyncStorage.setItem(key, JSON.stringify(value));
 	} catch (e) {
 		console.error(e);
 	}
@@ -18,7 +18,8 @@ export const storeData = async ({
 
 export const readData = async (key: Stores) => {
 	try {
-		return await AsyncStorage.getItem(key);
+		const jsonValue = await AsyncStorage.getItem(key);
+		return jsonValue != null ? JSON.parse(jsonValue) : null;
 	} catch (e) {
 		console.error(e);
 	}

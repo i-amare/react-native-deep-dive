@@ -24,12 +24,14 @@ export function PlacesContextProvider({
 	const [places, setPlaces] = useState<Place[]>([]);
 
 	useEffect(() => {
-		(async () => {
-			const store = readData('PlacesList')
-		})()
-	})
+		(async function loadPlaces() {
+			const store = await readData("PlacesList");
+			if (store?.length > 0) setPlaces(store);
+		})();
+	}, []);
 
 	useEffect(() => {
+		console.log("Places Context: ", places);
 		if (places.length > 0)
 			storeData({
 				key: "PlacesList",

@@ -13,30 +13,30 @@ import "react-native-reanimated";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-	const [loaded] = useFonts({
-		SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-	});
+  const [loaded] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+  });
 
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
-	if (!loaded) {
-		return null;
-	}
+  if (!loaded) {
+    return null;
+  }
 
-	return (
-		<ThemeProvider value={DarkTheme}>
-			<PlacesContextProvider>
-				<Stack>
-					<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-					<Stack.Screen name='places/[placeID]' />
-					<Stack.Screen name='+not-found' />
-				</Stack>
-			</PlacesContextProvider>
-			<StatusBar style='auto' />
-		</ThemeProvider>
-	);
+  return (
+    <ThemeProvider value={DarkTheme}>
+      <PlacesContextProvider>
+        <Stack>
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          <Stack.Screen name='places/[placeID]' />
+          <Stack.Screen name='+not-found' />
+        </Stack>
+      </PlacesContextProvider>
+      <StatusBar style='auto' />
+    </ThemeProvider>
+  );
 }

@@ -3,6 +3,7 @@ import { Feather } from "@expo/vector-icons";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { useContext } from "react";
 import { Image, Pressable, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Place() {
   const { places } = useContext(PlacesContext);
@@ -45,8 +46,13 @@ function ScreenHeader({ title, navigation }: ScreenHeaderProps) {
     navigation.goBack();
   };
 
+  const topInset = useSafeAreaInsets().top;
+
   return (
-    <View className='relative flex flex-row items-center justify-center bg-black p-4'>
+    <View
+      style={{ marginTop: topInset }}
+      className='relative flex flex-row items-center justify-center bg-black p-4'
+    >
       <Pressable
         onPressIn={onBackPress}
         className='absolute left-2 flex items-center justify-center rounded-full p-2'

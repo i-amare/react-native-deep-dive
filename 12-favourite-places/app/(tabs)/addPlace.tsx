@@ -1,4 +1,5 @@
 import Place from "@/classes/Place";
+import ImagePicker from "@/components/imagePicker";
 import { PlacesContext } from "@/contexts/PlacesContext";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
@@ -39,6 +40,7 @@ export default function AddPlace() {
           placeholder='Enter Address'
           onChange={(value) => setPlaceAddress(value)}
         />
+        <ImagePicker />
         <Pressable
           onPressIn={onAddPlaceButton}
           className='mt-6 flex w-full items-center justify-center rounded-lg bg-gray-900 py-4'

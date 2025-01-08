@@ -17,7 +17,7 @@ export default function PlaceItem({ place }: PlaceItemProps) {
     >
       <Image
         source={{
-          uri: "https://www.secretatlas.com/wp-content/uploads/2021/03/Hamnoy_Lofoten_Islands_Norway_Shutterstock_SecretAtlas_WebVersion.jpg",
+          uri: place.imageURL,
         }}
         className='h-2/3 w-full rounded-t-lg'
       />

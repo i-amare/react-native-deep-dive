@@ -1,9 +1,19 @@
 import * as ImagePickerAPI from "expo-image-picker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, Pressable, Text, View } from "react-native";
 
-export default function ImagePicker() {
+interface ImagePickerProps {
+  setPlaceImage: (image: string) => void;
+}
+
+export default function ImagePicker({ setPlaceImage }: ImagePickerProps) {
   const [image, setImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (image) {
+      setPlaceImage(image);
+    }
+  }, [image]);
 
   const pickImage = async () => {
     let result = await ImagePickerAPI.launchImageLibraryAsync({
@@ -29,12 +39,6 @@ export default function ImagePicker() {
           Choose Image from Camera Roll
         </Text>
       </Pressable>
-      {image && (
-        <Image
-          source={{ uri: image }}
-          className='mt-6 aspect-square w-full rounded-lg'
-        />
-      )}
     </View>
   );
 }

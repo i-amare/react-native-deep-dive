@@ -32,7 +32,6 @@ export default function RootLayout() {
       <PlacesContextProvider>
         <Stack>
           <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-          <Stack.Screen name='places' />
           <Stack.Screen name='+not-found' />
         </Stack>
       </PlacesContextProvider>

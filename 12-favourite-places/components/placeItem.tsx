@@ -13,7 +13,7 @@ export default function PlaceItem({ place }: PlaceItemProps) {
         pathname: "/places/[placeID]",
         params: { placeID: place.placeID },
       }}
-      className='my-2 aspect-square w-full rounded-lg bg-gray-900'
+      className='my-2 aspect-square w-full overflow-hidden rounded-lg bg-gray-900'
     >
       <Image
         source={{

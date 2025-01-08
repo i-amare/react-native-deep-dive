@@ -8,8 +8,8 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className='flex-1'>
-      <View className='flex-1 items-center justify-center bg-black p-8 font-semibold'>
-        <Text className='text-3xl text-white'>All Places</Text>
+      <View className='flex-1 items-center justify-center bg-black p-4 font-semibold'>
+        <Text className='mb-4 text-3xl text-white'>All Places</Text>
         <FlatList
           data={places}
           renderItem={({ item }) => <PlaceItem place={item} />}

@@ -25,7 +25,7 @@ export default function AddPlace() {
 
   return (
     <SafeAreaView className='flex-1'>
-      <View className='flex-1 items-center justify-start bg-black p-8'>
+      <View className='flex-1 items-center justify-start bg-black p-4'>
         <Text className='text-3xl text-white'>Add Place</Text>
         <FormInput
           label='Place Name'

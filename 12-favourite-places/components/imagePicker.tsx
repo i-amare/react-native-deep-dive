@@ -9,7 +9,6 @@ export default function ImagePicker() {
     let result = await ImagePickerAPI.launchImageLibraryAsync({
       mediaTypes: ["images"],
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
@@ -21,22 +20,20 @@ export default function ImagePicker() {
   };
 
   return (
-    <View className='w-full bg-red-400'>
+    <View className='mt-6 w-full'>
       <Pressable
         onPressIn={() => pickImage()}
         className='flex items-center justify-center rounded-md bg-gray-900 p-4'
       >
-        <Text className='text-2xl text-white'>
+        <Text className='text-xl font-semibold text-white'>
           Choose Image from Camera Roll
         </Text>
       </Pressable>
       {image && (
-        <View className='flex-1 items-center justify-center'>
-          <Image
-            source={{ uri: image }}
-            className='aspect-square w-full rounded-lg'
-          />
-        </View>
+        <Image
+          source={{ uri: image }}
+          className='mt-6 aspect-square w-full rounded-lg'
+        />
       )}
     </View>
   );

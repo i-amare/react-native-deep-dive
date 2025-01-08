@@ -3,7 +3,7 @@ import ImagePicker from "@/components/imagePicker";
 import { PlacesContext } from "@/contexts/PlacesContext";
 import { useRouter } from "expo-router";
 import { useContext, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FormInput } from "../../components/formInput";
 
@@ -25,8 +25,8 @@ export default function AddPlace() {
   };
 
   return (
-    <SafeAreaView className='flex-1'>
-      <View className='flex-1 items-center justify-start bg-black p-4'>
+    <SafeAreaView className='w-full flex-1 items-center justify-start bg-black p-4'>
+      <ScrollView className='w-full flex-1'>
         <Text className='text-3xl text-white'>Add Place</Text>
         <FormInput
           label='Place Name'
@@ -43,11 +43,11 @@ export default function AddPlace() {
         <ImagePicker />
         <Pressable
           onPressIn={onAddPlaceButton}
-          className='mt-6 flex w-full items-center justify-center rounded-lg bg-gray-900 py-4'
+          className='mt-6 mb-16 flex w-full items-center justify-center rounded-lg bg-gray-900 py-4'
         >
           <Text className='text-xl font-semibold text-white'>Add Place</Text>
         </Pressable>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

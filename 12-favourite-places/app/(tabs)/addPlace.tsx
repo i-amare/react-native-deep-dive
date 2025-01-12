@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { Image, Pressable, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FormInput } from "../../components/formInput";
+import { LocationPicker } from "@/components/locationPicker";
 
 export default function AddPlace() {
   const { addPlace } = useContext(PlacesContext);
@@ -41,12 +42,7 @@ export default function AddPlace() {
           placeholder='Enter Place Name'
           onChange={(value) => setPlaceName(value)}
         />
-        <FormInput
-          label='Address'
-          value={placeAddress}
-          placeholder='Enter Address'
-          onChange={(value) => setPlaceAddress(value)}
-        />
+        <LocationPicker setPlaceAddress={setPlaceAddress} />
         <ImagePicker setPlaceImage={setPlaceImage} />
         {placeImage && (
           <Image
